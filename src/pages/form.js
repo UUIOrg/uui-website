@@ -7,7 +7,7 @@ const form = () => {
         <>
             <SEO title="form" />
             <ContactFormWrapper>
-                
+                <h1>Hey There!</h1>
             </ContactFormWrapper>
         </>
     )
