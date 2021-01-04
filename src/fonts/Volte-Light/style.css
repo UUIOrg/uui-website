@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'Volte';
+    src: local('Volte Light'), local('Volte-Light'),
+        url('Volte-Light.woff2') format('woff2'),
+        url('Volte-Light.woff') format('woff'),
+        url('Volte-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+  }

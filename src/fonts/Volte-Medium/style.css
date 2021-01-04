@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'Volte';
+    src: local('Volte Medium'), local('Volte-Medium'),
+        url('Volte-Medium.woff2') format('woff2'),
+        url('Volte-Medium.woff') format('woff'),
+        url('Volte-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+  }

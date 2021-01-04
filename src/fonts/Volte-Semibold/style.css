@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'Volte';
+    src: local('Volte Semibold'), local('Volte-Semibold'),
+        url('Volte-Semibold.woff2') format('woff2'),
+        url('Volte-Semibold.woff') format('woff'),
+        url('Volte-Semibold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+  }

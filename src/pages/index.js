@@ -2,10 +2,7 @@ import React, { useEffect } from "react"
 import { Link, navigate } from "gatsby"
 import SEO from "../components/seo"
 
-const Form = (props) => {
-
-  console.log(props)
-
+const Form = () => {
   useEffect(() => {
     navigate('/form')
   })  
