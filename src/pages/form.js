@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import SEO from '../components/seo'
 import styled from 'styled-components'
 import Button from '../components/ui/Button.component'
 import Input from '../components/ui/Input.component'
+import { TweenMax,TimelineLite } from 'gsap'
 
 const Form = () => {
     const [clicked,setClicked] = React.useState(false);
@@ -31,6 +32,23 @@ const Form = () => {
             value: ''
         }
     })
+
+    let heroRef = useRef(null);
+
+    let contentRef = useRef(null);
+
+    let tl = new TimelineLite();
+
+    useEffect(() => {
+
+        console.log(contentRef.children)
+
+        TweenMax.to(heroRef,0,{ css : { visibility : 'visible' } })
+        ///tl.from()
+
+
+    },[])
+
     const options = [
         "E-commerce websites",
         "Html/css coding",
@@ -49,14 +67,12 @@ const Form = () => {
         formData.push({data : form[i],i})
     }
 
-    console.log(formData);
-
     return (
         <>
             <SEO title="form" />
-            <ContactFormWrapper>
-                <Content>
-                    <h1>Hey There!</h1>
+            <ContactFormWrapper ref={ele => heroRef = ele}>
+                <Content ref={el => contentRef = el}>
+                    <h1>Hey there!</h1>
                     <h2>Feel free to tell us what exactly you want</h2>
                     <div>
                         <h3>Not sure where to start from ?</h3>
@@ -105,7 +121,8 @@ display:inline-flex;
 height : calc(100vh - 44px);
 width: 100%;
 justify-content:center;
-align-items:center;
+align-items:center; 
+visibility: hidden;
 `
 
 const OptionSection = styled.div`
@@ -116,6 +133,8 @@ const Content = styled.div`
 transform: translateY(-5rem);
 max-width: 700px;
 h1{
+    font-weight: 600;
+    letter-spacing:-1px;
     span{
         font-size : 4rem;
     }
@@ -129,6 +148,7 @@ h2{
     -moz-background-clip: text;
     -webkit-text-fill-color: transparent; 
     -moz-text-fill-color: transparent;
+    text-overflow: -o-ellipsis-lastline;
 }
 h3{
     font-weight : 500;
