@@ -43,6 +43,8 @@ body {
   -ms-font-feature-settings: "kern", "liga", "clig", "calt";
   -webkit-font-feature-settings: "kern", "liga", "clig", "calt";
   font-feature-settings: "kern", "liga", "clig", "calt";
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 h1 {
@@ -152,21 +154,7 @@ p,div,section,main{
    -webkit-line-clamp: N; 
 }
 ::-webkit-scrollbar {
-  cursor: pointer;
-  height: 2px;  
-  -webkit-appearance: none;
-  background-color: rgba(229, 231, 235,1);
-
-}
-::-webkit-scrollbar-track {
-  background-color: rgba(255, 255, 255, 0.103);
-  cursor: pointer;
-  opacity:0;
-}
-::-webkit-scrollbar-thumb {
-  cursor: pointer;
-  background-color: rgba(96, 165, 250, 1);
-  border-radius: 50px;
+  display: none;
 }
 
 `

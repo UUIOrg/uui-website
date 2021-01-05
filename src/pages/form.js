@@ -2,9 +2,35 @@ import React from 'react'
 import SEO from '../components/seo'
 import styled from 'styled-components'
 import Button from '../components/ui/Button.component'
+import Input from '../components/ui/Input.component'
 
 const Form = () => {
     const [clicked,setClicked] = React.useState(false);
+    const [form,setForm] = React.useState({
+        name : {
+            inputType: 'input',
+            InputConfig : {
+                labelText : 'Your name',
+                type : "text"
+            },
+            value: ''
+        },
+        email : {
+            inputType : 'input',
+            InputConfig : {
+                labelText : 'Your email',
+                type : "text"
+            },
+            value: ''
+        },
+        tellus : {
+            inputType : 'textarea',
+            InputConfig : {
+                labelText : 'Tell us about your project',
+            },
+            value: ''
+        }
+    })
     const options = [
         "E-commerce websites",
         "Html/css coding",
@@ -13,8 +39,18 @@ const Form = () => {
         "SPAs",
         "Web design",
         "App design",
-        "Logo design"
+        "Logo design",
+        "Poster Design"
     ]
+
+    let formData = [];
+
+    for(let i in form){
+        formData.push({data : form[i],i})
+    }
+
+    console.log(formData);
+
     return (
         <>
             <SEO title="form" />
@@ -37,6 +73,7 @@ const Form = () => {
                                 onClick={_ => setClicked(!clicked)}
                                 border="1px solid rgba(0, 0, 0, 0.1)"
                                 color="var(--textbase)"
+                                margin={"0 1rem 1rem 0"}
                                 clicked={clicked}
                                 key={option}>
                                     {option}
@@ -44,6 +81,16 @@ const Form = () => {
                             })
                         }
                     </OptionSection>
+                    <form>
+                       {
+                           formData.map(({data,i}) => {
+                               return <Input
+                               key={i}
+                               {...data}
+                               />
+                           } )
+                       }
+                    </form>
                 </FormComp>
             </ContactFormWrapper>
         </>
@@ -94,11 +141,13 @@ p{
 }
 `
 const FormComp = styled.div`
-margin-left : 3rem;
+margin-left : 5rem;
 width: 600px;
 h3{
     color : var(--text2);
     font-size : 1.5rem;
-    
+}
+form{
+
 }
 `

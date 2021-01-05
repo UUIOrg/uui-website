@@ -12,52 +12,8 @@ const React = require("react")
 const Layout = require("./src/components/layout").default
 const { Provider } = require('react-redux')
 const { default: store } = require('./src/store/store')
-const VolteBold = require('./src/fonts/Volte-Bold.ttf');
-const VolteSemibold = require('./src/fonts/Volte-Semibold.ttf');
-const VolteMedium = require('./src/fonts/Volte-Medium.ttf');
-const VolteRegular = require('./src/fonts/Volte-Regular.ttf');
-const VolteLight = require('./src/fonts/Volte-Light.ttf');
-
 
 const GlobalStyles = createGlobalStyle`
-@font-face{
-  font-family : 'volte';
-  font-style : bold;
-  font-weight: 900;
-  src: local('Font Name'), local('FontName'),
-        url(${VolteBold}) format('tff');
-@font-face{
-  font-family : 'volte';
-  src: local('Font Name'), local('FontName'),
-        url(${VolteSemibold}) format('tff');
-  font-style : bold;
-  font-weight: 700;
-}
-
-@font-face{
-   font-family : 'volte';
-   src: local('Font Name'), local('FontName'),
-        url(${VolteMedium}) format('tff');
-  font-style : medium;
-  font-weight: 600;
-}
-
-@font-face{
-   font-family : 'volte';
-   src: local('Font Name'), local('FontName'),
-        url(${VolteRegular}) format('tff');
-  font-style : medium;
-  font-weight: 400;
-}
-
-@font-face{
-   font-family : 'volte';
-   src: local('Font Name'), local('FontName'),
-        url(${VolteLight}) format('tff');
-  font-style : normal;
-  font-weight: 300;
-}
-
 :root{ 
   --font : 'volte';
 }
@@ -658,7 +614,7 @@ pre tt:after {
     font-size: 100%;
   }
 }
-}
+
 `
 
 exports.wrapPageElement = ({ element, props }) => {
