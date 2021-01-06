@@ -58,7 +58,7 @@ const InputElement = styled.div`
 	float: right;
 	padding: 0 1em;
 	width: 40%;
-	color: #6a7989;
+	color: var(--text2);
 	font-weight: bold;
 	font-size: 70.25%;
 	-webkit-font-smoothing: antialiased;

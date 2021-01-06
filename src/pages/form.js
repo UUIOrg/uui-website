@@ -38,13 +38,28 @@ const Form = () => {
     let contentRef = useRef(null);
 
     let tl = new TimelineLite();
+    
+    const RemoveWrapper = wrapper => {
+
+    
+    } 
+
+    const spanCreater = text => text.split(' ').map(each => <span>{each}&nbsp;</span>)
 
     useEffect(() => {
 
-        console.log(contentRef.children)
+        const h1Content = contentRef.children[0].firstElementChild;
 
-        TweenMax.to(heroRef,0,{ css : { visibility : 'visible' } })
+        console.log(h1Content);
+
+        TweenMax.to(heroRef,0,{ css : { visibility : 'visible' } });
         ///tl.from()
+        /*tl.from(h1Content.firstElementChild,1,{
+            opacity:0,
+            y:72,
+            ease: "power4.inOut",
+            delay: 0.2
+        })*/
 
 
     },[])
@@ -72,11 +87,14 @@ const Form = () => {
             <SEO title="form" />
             <ContactFormWrapper ref={ele => heroRef = ele}>
                 <Content ref={el => contentRef = el}>
-                    <h1>Hey there!</h1>
-                    <h2>Feel free to tell us what exactly you want</h2>
+                    <div className="wrapper"><h1>Hey There!</h1></div>
+                    <h2><span>Feel free to tell us what</span> <br />  <span>exactly you want</span></h2>
                     <div>
                         <h3>Not sure where to start from ?</h3>
-                        <p>You can tell us about your startup, your company, your business or your product.</p>
+                        <p>
+                        <span>You can tell us about your startup, your company, </span>
+                        <br /><span>your business or your product.</span>
+                        </p>
                     </div>
                 </Content>
                 <FormComp>
@@ -131,10 +149,15 @@ const OptionSection = styled.div`
 
 const Content = styled.div`
 transform: translateY(-5rem);
-max-width: 700px;
+.wrapper{
+    overflow: hidden;
+    height:100px;
+    margin-bottom: 2rem;
+}
 h1{
     font-weight: 600;
     letter-spacing:-1px;
+    height:100px;
     span{
         font-size : 4rem;
     }
@@ -149,6 +172,7 @@ h2{
     -webkit-text-fill-color: transparent; 
     -moz-text-fill-color: transparent;
     text-overflow: -o-ellipsis-lastline;
+    height:50%;
 }
 h3{
     font-weight : 500;
@@ -156,7 +180,6 @@ h3{
     margin-bottom:0.8rem;
 }
 p{
-    max-width: 500px;
     margin: 0;
 }
 `
