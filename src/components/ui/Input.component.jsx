@@ -15,12 +15,9 @@ const Input = ({inputType,value,onChange,InputConfig}) => {
 export default Input
 
 
-const Element = ({labelText,EleType,...otherInpProps}) =>  
+const Element = ({EleType,...otherInpProps}) =>  
     <InputElement className="input input--nao">
         <EleType className="input__field input__field--nao" id="input-1" {...otherInpProps}/>
-        <label className="input__label input__label--nao" for="input-1">
-            <span className="input__label-content input__label-content--nao">{labelText}</span>
-        </label>
         <svg className="graphic graphic--nao" width="300%" height="100%" viewBox="0 0 1200 60" preserveAspectRatio="none">
             <path d="M0,56.5c0,0,298.666,0,399.333,0C448.336,56.5,513.994,46,597,46c77.327,0,135,10.5,200.999,10.5c95.996,0,402.001,0,402.001,0"/>
         </svg>
@@ -30,11 +27,12 @@ const InputElement = styled.div`
     position: relative;
 	z-index: 1;
 	display: inline-block;
-	margin: 1em;
+	margin: 1em 0;
 	max-width: 900px;
 	width: calc(100% - 2em);
 	vertical-align: top;
 .input__field {
+	font-family: 'Volte';
 	position: relative;
 	display: block;
 	float: right;
@@ -90,12 +88,12 @@ const InputElement = styled.div`
 	font-size: 150%;
 }
 & {
-	overflow: hidden;
+	overflow-x: hidden;
 	padding-top: 1em;
 }
 
 .input__field--nao {
-	padding: 0.5em 0em 0.25em;
+	padding: 0.5em 0em 0.7em;
 	width: 100%;
 	background: transparent;
 	color: #9da8b2;

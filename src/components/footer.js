@@ -11,7 +11,7 @@ const footer = props => {
       <div className="footer__bottom">
         <div className="footer__contact">
           <Link to="mailto:uui@gmail.com" className="default border email link">
-            urbanui@gmail.com
+            urbui0221@gmail.com
           </Link>
           <h4 className="default location">Kolkata | India</h4>
         </div>

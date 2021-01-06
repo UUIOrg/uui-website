@@ -15,6 +15,7 @@ import '../fonts/Volte-Semibold/style.css'
 import '../fonts/Volte-Medium/style.css'
 import '../fonts/Volte-Regular/style.css'
 import '../fonts/Volte-Light/style.css'
+import styled from "styled-components"
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -32,7 +33,6 @@ const Layout = ({ children }) => {
       <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
       <div>
         <main>{children}</main>
-        
         <Footer />
       </div>
     </>
@@ -42,5 +42,6 @@ const Layout = ({ children }) => {
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
 }
+
 
 export default Layout
