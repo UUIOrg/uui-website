@@ -121,12 +121,9 @@ const Form = () => {
                         {
                             options.map(option => {
                                 return <Button
-                                options
-                                onClick={_ => setClicked(!clicked)}
                                 border="1px solid rgba(0, 0, 0, 0.1)"
                                 color="var(--textbase)"
                                 margin={"0 1rem 1rem 0"}
-                                clicked={clicked}
                                 key={option}>
                                     {option}
                                 </Button>
@@ -141,7 +138,7 @@ const Form = () => {
                                onChange={eve => onChangeHandler(eve,i)}
                                {...data}
                                />
-                           } )
+                           } ) 
                        }
                     <ProjectBudget>
                         <h3>Project budget(INR)</h3>
@@ -149,12 +146,9 @@ const Form = () => {
                             {
                                 budgets.map(option => {
                                     return <Button
-                                    options
-                                    onClick={_ => setClicked(!clicked)}
                                     border="1px solid rgba(0, 0, 0, 0.1)"
                                     color="var(--textbase)"
                                     margin={"0 1rem 1rem 0"}
-                                    clicked={clicked}
                                     key={option}>
                                         {option}
                                     </Button>
@@ -211,7 +205,7 @@ h2{
     -webkit-text-fill-color: transparent; 
     -moz-text-fill-color: transparent;
     text-overflow: -o-ellipsis-lastline;
-    font-size:3rem;
+    font-size:3.5rem;
 }
 h3{
     font-weight : 500;
@@ -225,7 +219,7 @@ p{
 `
 const FormComp = styled.div`
 margin-left : 5rem;
-max-width: 800px;
+max-width: 780px;
 h3{
     color : var(--text2);
     font-size : 1.5rem;
@@ -271,12 +265,12 @@ width:max-content;
     content : '';
     background-color : var(--text2);
     height: 2px;
-    width: 40px; 
+    width: 30px; 
     margin-right : 10px; 
     transition: 0.3s all;
 }
 &:hover::before{
-    width: 20px; 
+    width: 40px; 
 }
 span{
     &:last-child{
@@ -288,9 +282,7 @@ span{
         color : #fff;
         padding: 0.5rem;
         border-radius: 50%;
-        svg{
-            fill : linear-gradient(120deg, var(--lightBlue), var(--deepBlue));
-        }
+
     }
 }
 `

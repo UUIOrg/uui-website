@@ -41,10 +41,12 @@ const InputElement = styled.div`
 	border: none;
 	border-radius: 0;
 	background: #f0f0f0;
-	color: #aaa;
-	font-weight: 400;
+	font-weight: 500;
 	-webkit-appearance: none; 
     resize:none;
+	::-webkit-input-placeholder{
+		color : var(--text2);
+	}
 }
 
 .input__field:focus {
@@ -96,7 +98,6 @@ const InputElement = styled.div`
 	padding: 0.5em 0em 0.7em;
 	width: 100%;
 	background: transparent;
-	color: #9da8b2;
 	font-size: 1.25em;
 }
 
