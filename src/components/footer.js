@@ -21,10 +21,10 @@ const footer = props => {
             Facebook
           </Link>
           <Link to="www.instagram.com" className="link">
-            Instagram
+            LinkedIn
           </Link>
           <Link to="www.linkedin.com" className="link">
-            LinkedIn
+            Github
           </Link>
         </div>
       </div>
@@ -33,8 +33,26 @@ const footer = props => {
 }
 
 const FooterContainer = styled.div`
-  background-color: #000;
-  padding: 100px 200px 70px 200px;
+font-family: 'Volte';
+h2{
+  &:first-child{
+    font-weight: 500;
+    background-color: #f3ec78;
+    background-image: linear-gradient(120deg, var(--lightBlue), var(--deepBlue));
+    background-size: 100%;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent; 
+    -moz-text-fill-color: transparent;
+    text-overflow: -o-ellipsis-lastline;
+    font-size: 4rem;
+  }
+  &:last-child{
+    font-weight: 400;
+  }
+}
+  background-color: var(--textbase);
+  padding: 100px 10vw 70px 10vw;
 
   .social__links {
     display: flex;

@@ -48,18 +48,18 @@ const Form = () => {
 
     useEffect(() => {
 
-        const h1Content = contentRef.children[0].firstElementChild;
+        const h1Content = contentRef.children[0];
 
         console.log(h1Content);
 
         TweenMax.to(heroRef,0,{ css : { visibility : 'visible' } });
         ///tl.from()
-        /*tl.from(h1Content.firstElementChild,1,{
+        tl.from(h1Content,1,{
             opacity:0,
             y:72,
             ease: "power4.inOut",
             delay: 0.2
-        })*/
+        })
 
 
     },[])
@@ -86,14 +86,16 @@ const Form = () => {
         <>
             <SEO title="form" />
             <ContactFormWrapper ref={ele => heroRef = ele}>
-                <Content ref={el => contentRef = el}>
-                    <div className="wrapper"><h1>Hey There!</h1></div>
+            <Content ref={el => contentRef = el}>
+                    <h1>
+                        <span>Hey There!</span>
+                    </h1>
                     <h2><span>Feel free to tell us what</span> <br />  <span>exactly you want</span></h2>
                     <div>
                         <h3>Not sure where to start from ?</h3>
                         <p>
-                        <span>You can tell us about your startup, your company, </span>
-                        <br /><span>your business or your product.</span>
+                            <span>You can tell us about your startup, your company, </span>
+                            <br /><span>your business or your product.</span>
                         </p>
                     </div>
                 </Content>
@@ -135,12 +137,11 @@ export default Form
 
 
 const ContactFormWrapper = styled.section`
-display:inline-flex;
-height : calc(100vh - 44px);
 width: 100%;
-justify-content:center;
-align-items:center; 
+padding: 0 10vw 5vw 10vw;
 visibility: hidden;
+display:inline-flex;
+align-items:center; 
 `
 
 const OptionSection = styled.div`
@@ -148,18 +149,16 @@ const OptionSection = styled.div`
 `
 
 const Content = styled.div`
-transform: translateY(-5rem);
-.wrapper{
-    overflow: hidden;
-    height:100px;
-    margin-bottom: 2rem;
-}
+padding-bottom : 15rem;
 h1{
     font-weight: 600;
     letter-spacing:-1px;
     height:100px;
+    overflow:hidden;
     span{
         font-size : 4rem;
+        height:72px;
+        overflow: hidden;
     }
 }
 h2{
@@ -172,7 +171,6 @@ h2{
     -webkit-text-fill-color: transparent; 
     -moz-text-fill-color: transparent;
     text-overflow: -o-ellipsis-lastline;
-    height:50%;
 }
 h3{
     font-weight : 500;
@@ -181,16 +179,15 @@ h3{
 }
 p{
     margin: 0;
+    font-weight:500;
 }
 `
 const FormComp = styled.div`
 margin-left : 5rem;
-width: 600px;
+max-width: 600px;
+padding-top: 10rem;
 h3{
     color : var(--text2);
     font-size : 1.5rem;
-}
-form{
-
 }
 `

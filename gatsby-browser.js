@@ -16,7 +16,7 @@ const { default :{ store } } = require('./src/store/store');
 const GlobalStyles = createGlobalStyle`
 :root{
   --font : 'Volte';
-  --textbase : rgba(31, 41, 55, 1);
+  --textbase : #000;
   --text : rgba(156, 163, 175, 1);
   --text2 : rgb(175, 175, 175);
   --deepBlue :  #0093E9;
@@ -31,6 +31,9 @@ html {
   overflow-y: scroll;
 }
 body {
+  width:100vw;
+  height:100vh;
+  overflow-x:hidden;
   font-family : var(--font);
   color : var(--text2);
   margin: 0;
