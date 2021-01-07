@@ -3,7 +3,7 @@ import SEO from '../components/seo'
 import styled from 'styled-components'
 import Button from '../components/ui/Button.component'
 import Input from '../components/ui/Input.component'
-import { TweenMax,TimelineLite } from 'gsap'
+import { gsap } from 'gsap'
 import { ArrowRight } from '../components/utils/icons'
 
 const Form = () => {
@@ -88,14 +88,15 @@ const Form = () => {
     }
 
     useEffect(() => {
-       localStorage.clear();
+        if(countDown){
+            setTimeout(() => {
+                localStorage.clear();
+            },7000)
+        }
     },[countDown])
 
     let heroRef = useRef(null);
-
     let contentRef = useRef(null);
-
-    let tl = new TimelineLite();
 
     useEffect(() => {
 
@@ -103,13 +104,11 @@ const Form = () => {
 
         console.log([...h1Content.children]); 
 
-        TweenMax.to(heroRef,0,{ css : { visibility : 'visible' } });
-       /* tl.from(h1Content,1,{
-            opacity:0,
-            y:72,
-            ease: "power4.inOut",
-            delay: 0.2
-        }) */
+        gsap.timeline()
+            .set(heroRef,
+                { css : 
+                    { visibility : 'visible' } 
+                })
 
 
     },[])
@@ -211,11 +210,11 @@ h1{
     font-weight: 600;
     letter-spacing:-1px;
     height:100px;
-    overflow:hidden;
+    overflow:none;
     span{
         font-size : 5.2rem;
         height:72px;
-        overflow: hidden;
+        overflow: none;
     }
 }
 h2{
