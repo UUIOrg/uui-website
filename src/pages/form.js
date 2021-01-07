@@ -64,6 +64,7 @@ const Form = () => {
 
     let heroRef = useRef(null);
     let contentRef = useRef(null);
+    let h2Ref = useRef(null); 
 
 
     let formData = [];
@@ -97,27 +98,60 @@ const Form = () => {
 
 
     useEffect(() => {
-
         const h1Content = contentRef.children[0];
+        const h2Content = h1Content.nextSibling;
+        const h3Content = h2Content.nextSibling;
 
-        console.log([...h1Content.children]); 
+        console.log(h3Content); 
 
+        gsap.set(heroRef,{
+            css: {
+              visibility : 'visible'
+            }
+          })
         gsap.timeline()
-            .set(heroRef,
-                { css : 
-                    { visibility : 'visible' } 
-                })
-            .from([...h1Content.children],{
-                y: 72,
+            .from(h1Content.children[0],{
+                y: 150,
                 duration: 1,
                 ease: 'power4',
-                stagger:{
-                  amount: 0.3,
-                  from: 'start'
-                }
+                delay: 0.2
               }
-            )
-    },[])
+            ).from(h1Content.children[1],{
+                opacity: 0,
+                duration: 1,
+                ease: 'power4',
+            },"-=0.4")
+            .from(h2Content,{
+                y: 30,
+                opacity: 0,
+                duration:1,
+                ease: 'power4',
+                stagger:{
+                  amount: 1,
+                  from: 'start'
+                } 
+            },"-=1.2")
+            .from(h3Content.children[0],{
+                y: 30,
+                opacity: 0,
+                duration:1,
+                ease: 'power4',
+                stagger:{
+                    amount: 1,
+                    from: 'start'
+                } 
+            },"-=1")
+            .from(h3Content.children[1],{
+                y: 30,
+                opacity: 0,
+                duration:1.5,
+                ease: 'power4',
+                stagger:{
+                    amount: 1,
+                    from: 'start'
+                } 
+            },"-=0.8")
+    })
 
     return (
         <>
@@ -132,7 +166,7 @@ const Form = () => {
                             <img src={require("../images/hands.gif")} alt="wavers"/>
                         </Emoji>
                     </Header>
-                    <h2><span>Feel free to tell us what</span> <br />  <span>exactly you want.</span></h2>
+                    <h2 ref={el => h2Ref = el}><span>Feel free to tell us what</span> <br />  <span>exactly you want.</span></h2>
                     <div>
                         <h3>Not sure where to start from ?</h3>
                         <p>
@@ -215,7 +249,6 @@ const Content = styled.div`
 h1{
     font-weight: 600;
     letter-spacing:-1px;
-    height:100px;
     overflow:hidden;
 }
 h2{
@@ -227,10 +260,15 @@ h2{
     -moz-background-clip: text;
     -webkit-text-fill-color: transparent; 
     -moz-text-fill-color: transparent;
-    text-overflow: -o-ellipsis-lastline;
     font-size:2.8rem;
     width: max-content;
     margin-bottom: 2rem;
+    overflow: hidden;
+    padding:0;
+    height: max-content;
+    span{
+
+    }
 }
 h3{
     font-weight : 500;
@@ -255,8 +293,10 @@ h3{
 const Header = styled.div`
 display:flex;
 align-items: center;
-margin-bottom: 1rem;
+align-content:center;
+margin-bottom: 2rem;
 overflow: hidden;
+padding:0;
 height: max-content;
 ` 
 
@@ -265,7 +305,7 @@ position: relative;
 overflow: hidden;
 width:5rem;
 height:5rem;
-top: -1rem;
+top: -0.5rem;
 left: -0.1rem;
 img{
     position: absolute;
