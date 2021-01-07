@@ -89,6 +89,7 @@ body {
   font-feature-settings: "kern", "liga", "clig", "calt";
   -ms-overflow-style: none;
   scrollbar-width: none;
+  user-select: none;
 }
 
 h1 {
@@ -104,7 +105,7 @@ h1 {
   padding-top: 0;
   color: var(--textbase);
   text-rendering: optimizeLegibility;
-  font-size: 5.25rem;
+  font-size: 5rem;
   line-height: 1.1;
   font-weight: ${props => props.weight || '700'};
   font-style: normal;

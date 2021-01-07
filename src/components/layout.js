@@ -31,7 +31,7 @@ const Layout = ({ children }) => {
     <>
       <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
       <div>
-        <main>{children}</main>
+        <Main>{children}</Main>
         <Footer />
       </div>
     </>
@@ -44,3 +44,9 @@ Layout.propTypes = {
 
 
 export default Layout
+
+const Main = styled.main`
+width : 100%;
+display:flex;
+justify-content :  center;
+`

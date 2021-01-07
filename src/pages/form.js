@@ -1,10 +1,11 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import SEO from '../components/seo'
 import styled from 'styled-components'
 import Button from '../components/ui/Button.component'
 import Input from '../components/ui/Input.component'
-import { TweenMax,TimelineLite } from 'gsap'
+import { gsap } from 'gsap'
 import { ArrowRight } from '../components/utils/icons'
+import { budgetValue, requirments } from '../components/utils/options'
 
 const Form = () => {
     const [clicked,setClicked] = React.useState(false);
@@ -12,16 +13,30 @@ const Form = () => {
         name : {
             inputType: 'input',
             InputConfig : {
-             placeholder:"Your name",
+                placeholder:"Your name",
                 type : "text"
+            },
+            Validation : {
+                isTouched : false,
+                isFilled : false,
+                rules : {
+                   
+                }
             },
             value: ''
         },
         email : {
             inputType : 'input',
             InputConfig : {
-              placeholder:"Your email",
+                placeholder:"Your email",
                 type : "text"
+            },
+            Validation : {
+                isTouched : false,
+                isFilled : false,
+                rules : {
+                    shouldHave : '@'
+                }
             },
             value: ''
         },
@@ -30,36 +45,32 @@ const Form = () => {
             InputConfig : {
                placeholder:"Tell us about your project",
             },
+            Validation : {
+                isTouched : false,
+                isFilled : false,
+                rules : {
+                    maxlength : 300
+                }
+            },
             value: ''
         }
-    })
+    });
 
-    const [options,setOPtions] = React.useState([
-        "E-commerce websites",
-        "Html/css coding",
-        "Blogs",
-        "Android apps",
-        "SPAs",
-        "Web design",
-        "App design",
-        "Logo design",
-        "Poster Design"
-    ])
+    const [countDown,setCountDown] = useState(false);
 
-    const [ budgets,setBudget ] = React.useState([
-        "< 10k",
-        "10-20k",
-        "20-30k",
-        "40-50k",
-        "> 50k"
-    ])
+    const [ options,setOPtions ] = React.useState(requirments)
+
+    const [ budgets,setBudget ] = React.useState(budgetValue);
+
+    let heroRef = useRef(null);
+    let contentRef = useRef(null);
+
 
     let formData = [];
 
     for(let i in form){
         formData.push({data : form[i],i})
     }
-
 
     const onChangeHandler = (eve,id) => {
         const { value } = eve.target;
@@ -70,43 +81,58 @@ const Form = () => {
         setForm(updatedForm);
     }
 
-    let heroRef = useRef(null);
+    const SubmitHandler = eve => {
+        eve.preventDefault();
+        localStorage.setItem("client_send", true);
+        setCountDown(true);
+    }
 
-    let contentRef = useRef(null);
+    useEffect(() => {
+        if(countDown){
+            setTimeout(() => {
+                localStorage.clear();
+            },7000)
+        }
+    },[countDown])
 
-    let tl = new TimelineLite();
 
     useEffect(() => {
 
         const h1Content = contentRef.children[0];
 
-        console.log(h1Content);
+        console.log([...h1Content.children]); 
 
-        TweenMax.to(heroRef,0,{ css : { visibility : 'visible' } });
-       /* tl.from(h1Content,1,{
-            opacity:0,
-            y:72,
-            ease: "power4.inOut",
-            delay: 0.2
-        }) */
-
-
+        gsap.timeline()
+            .set(heroRef,
+                { css : 
+                    { visibility : 'visible' } 
+                })
+            .from([...h1Content.children],{
+                y: 72,
+                duration: 1,
+                ease: 'power4',
+                stagger:{
+                  amount: 0.3,
+                  from: 'start'
+                }
+              }
+            )
     },[])
 
     return (
         <>
-            <SEO title="form" />
+            <SEO title="Let's Chat" />
             <ContactFormWrapper ref={ele => heroRef = ele}>
             <Content ref={el => contentRef = el}>
                     <Header>
                         <h1>
-                            <span>Hey there!</span>
+                           <span>Hey there!</span>
                         </h1>
                         <Emoji>
                             <img src={require("../images/hands.gif")} alt="wavers"/>
                         </Emoji>
                     </Header>
-                    <h2><span>Feel free to tell us what</span> <br />  <span>exactly you want</span></h2>
+                    <h2><span>Feel free to tell us what</span> <br />  <span>exactly you want.</span></h2>
                     <div>
                         <h3>Not sure where to start from ?</h3>
                         <p>
@@ -130,7 +156,7 @@ const Form = () => {
                             })
                         }
                     </OptionSection>
-                    <form>
+                    <form onSubmit={SubmitHandler}>
                        {
                            formData.map(({data,i}) => {
                                return <Input
@@ -141,7 +167,7 @@ const Form = () => {
                            } ) 
                        }
                     <ProjectBudget>
-                        <h3>Project budget(INR)</h3>
+                        <h3>Project budget (INR)</h3>
                         <OptionSection>
                             {
                                 budgets.map(option => {
@@ -156,7 +182,7 @@ const Form = () => {
                             }
                         </OptionSection>
                     </ProjectBudget>
-                    <SubmitButton>
+                    <SubmitButton disabled={false}>
                         <span>Submit</span>
                         <span>
                             <ArrowRight size="1.8rem"/>
@@ -173,14 +199,16 @@ export default Form
 
 
 const ContactFormWrapper = styled.section`
-padding: 5vw 10vw 5vw 10vw;
+padding: 5vw 1rem 5vw 1rem;
 visibility: hidden;
 display:inline-flex;
 align-items:baseline; 
+justify-items : center;
+margin: 0 auto;
 `
 
 const OptionSection = styled.div`
-
+width:fit-content;
 `
 
 const Content = styled.div`
@@ -189,11 +217,6 @@ h1{
     letter-spacing:-1px;
     height:100px;
     overflow:hidden;
-    span{
-        font-size : 4rem;
-        height:72px;
-        overflow: hidden;
-    }
 }
 h2{
     font-weight : 500;
@@ -205,7 +228,9 @@ h2{
     -webkit-text-fill-color: transparent; 
     -moz-text-fill-color: transparent;
     text-overflow: -o-ellipsis-lastline;
-    font-size:3.5rem;
+    font-size:2.8rem;
+    width: max-content;
+    margin-bottom: 2rem;
 }
 h3{
     font-weight : 500;
@@ -215,6 +240,8 @@ h3{
 p{
     margin: 0;
     font-weight:500;
+    text-align: justify;
+    text-justify:distribute;
 }
 `
 const FormComp = styled.div`
@@ -228,6 +255,9 @@ h3{
 const Header = styled.div`
 display:flex;
 align-items: center;
+margin-bottom: 1rem;
+overflow: hidden;
+height: max-content;
 ` 
 
 const Emoji = styled.div`
@@ -235,7 +265,8 @@ position: relative;
 overflow: hidden;
 width:5rem;
 height:5rem;
-top: -0.5rem;
+top: -1rem;
+left: -0.1rem;
 img{
     position: absolute;
     top: 0;
