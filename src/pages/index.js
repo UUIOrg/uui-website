@@ -1,5 +1,5 @@
 import React, { useEffect } from "react"
-import { Link, navigate } from "gatsby"
+import { navigate } from "gatsby"
 import SEO from "../components/seo"
 
 const Form = () => {

@@ -32,7 +32,11 @@ const Layout = ({ children }) => {
     <>
       <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
       <div>
-        <Main>{children}</Main>
+        <Main>
+        <div className="row">
+        {children}
+        </div>
+        </Main>
         <Footer />
       </div>
     </>

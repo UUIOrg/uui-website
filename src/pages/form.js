@@ -151,7 +151,7 @@ const Form = () => {
                     from: 'start'
                 } 
             },"-=0.8")
-    })
+    },[])
 
     return (
         <>
@@ -219,7 +219,7 @@ const Form = () => {
                     <SubmitButton disabled={false}>
                         <span>Submit</span>
                         <span>
-                            <ArrowRight size="1.8rem"/>
+                            <ArrowRight size="3rem"/>
                         </span>
                     </SubmitButton>
                     </form>
@@ -242,7 +242,7 @@ margin: 0 auto;
 `
 
 const OptionSection = styled.div`
-width:fit-content;
+max-width:100%;
 `
 
 const Content = styled.div`
@@ -250,6 +250,7 @@ h1{
     font-weight: 600;
     letter-spacing:-1px;
     overflow:hidden;
+    margin-bottom: 0;
 }
 h2{
     font-weight : 500;
@@ -260,9 +261,8 @@ h2{
     -moz-background-clip: text;
     -webkit-text-fill-color: transparent; 
     -moz-text-fill-color: transparent;
-    font-size:2.8rem;
     width: max-content;
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
     overflow: hidden;
     padding:0;
     height: max-content;
@@ -272,8 +272,8 @@ h2{
 }
 h3{
     font-weight : 500;
-    font-size: 1.2rem;
-    margin-bottom:0.8rem;
+    margin-bottom:1rem;
+    font-size: 2rem;
 }
 p{
     margin: 0;
@@ -287,14 +287,14 @@ margin-left : 5rem;
 max-width: 780px;
 h3{
     color : var(--text2);
-    font-size : 1.5rem;
+    font-size : 2rem;
 }
 `
 const Header = styled.div`
 display:flex;
 align-items: center;
 align-content:center;
-margin-bottom: 2rem;
+margin-bottom: 3rem;
 overflow: hidden;
 padding:0;
 height: max-content;
@@ -303,8 +303,8 @@ height: max-content;
 const Emoji = styled.div`
 position: relative;
 overflow: hidden;
-width:5rem;
-height:5rem;
+width:8rem;
+height:8rem;
 top: -0.5rem;
 left: -0.1rem;
 img{
@@ -331,12 +331,11 @@ display:flex;
 align-items: center;
 margin-top: 3rem;
 width:max-content;
-
 &::before{
     content : '';
     background-color : var(--text2);
     height: 2px;
-    width: 30px; 
+    width:  3rem;
     margin-right : 10px; 
     transition: 0.3s all;
 }
@@ -351,7 +350,7 @@ span{
         margin-left : 10px;
         background-color:var(--textbase);
         color : #fff;
-        padding: 0.5rem;
+        padding: 1rem;
         border-radius: 50%;
 
     }
