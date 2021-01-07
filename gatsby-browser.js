@@ -65,7 +65,7 @@ h1 {
   margin-bottom: 1.45rem;
   color: var(--textbase);
   text-rendering: optimizeLegibility;
-  font-size: 5.25rem;
+  font-size: 5rem;
   line-height: 1.1;
   font-weight: ${props => props.weight || '700'};
   font-style: normal;

@@ -5,6 +5,7 @@ import Button from '../components/ui/Button.component'
 import Input from '../components/ui/Input.component'
 import { gsap } from 'gsap'
 import { ArrowRight } from '../components/utils/icons'
+import { budgetValue, requirments } from '../components/utils/options'
 
 const Form = () => {
     const [clicked,setClicked] = React.useState(false);
@@ -17,6 +18,10 @@ const Form = () => {
             },
             Validation : {
                 isTouched : false,
+                isFilled : false,
+                rules : {
+                   
+                }
             },
             value: ''
         },
@@ -28,6 +33,10 @@ const Form = () => {
             },
             Validation : {
                 isTouched : false,
+                isFilled : false,
+                rules : {
+                    shouldHave : '@'
+                }
             },
             value: ''
         },
@@ -38,6 +47,10 @@ const Form = () => {
             },
             Validation : {
                 isTouched : false,
+                isFilled : false,
+                rules : {
+                    maxlength : 300
+                }
             },
             value: ''
         }
@@ -45,32 +58,19 @@ const Form = () => {
 
     const [countDown,setCountDown] = useState(false);
 
-    const [options,setOPtions] = React.useState([
-        "E-commerce websites",
-        "Html/css coding",
-        "Blogs",
-        "Android apps",
-        "SPAs",
-        "Web design",
-        "App design",
-        "Logo design",
-        "Poster Design"
-    ])
+    const [ options,setOPtions ] = React.useState(requirments)
 
-    const [ budgets,setBudget ] = React.useState([
-        "< 10k",
-        "10-20k",
-        "20-30k",
-        "40-50k",
-        "> 50k"
-    ])
+    const [ budgets,setBudget ] = React.useState(budgetValue);
+
+    let heroRef = useRef(null);
+    let contentRef = useRef(null);
+
 
     let formData = [];
 
     for(let i in form){
         formData.push({data : form[i],i})
     }
-
 
     const onChangeHandler = (eve,id) => {
         const { value } = eve.target;
@@ -95,8 +95,6 @@ const Form = () => {
         }
     },[countDown])
 
-    let heroRef = useRef(null);
-    let contentRef = useRef(null);
 
     useEffect(() => {
 
@@ -109,8 +107,16 @@ const Form = () => {
                 { css : 
                     { visibility : 'visible' } 
                 })
-
-
+            .from([...h1Content.children],{
+                y: 72,
+                duration: 1,
+                ease: 'power4',
+                stagger:{
+                  amount: 0.3,
+                  from: 'start'
+                }
+              }
+            )
     },[])
 
     return (
@@ -120,13 +126,13 @@ const Form = () => {
             <Content ref={el => contentRef = el}>
                     <Header>
                         <h1>
-                            <span>Hey there!</span>
+                           <span>Hey there!</span>
                         </h1>
                         <Emoji>
                             <img src={require("../images/hands.gif")} alt="wavers"/>
                         </Emoji>
                     </Header>
-                    <h2><span>Feel free to tell us what</span> <br />  <span>exactly you want</span></h2>
+                    <h2><span>Feel free to tell us what</span> <br />  <span>exactly you want.</span></h2>
                     <div>
                         <h3>Not sure where to start from ?</h3>
                         <p>
@@ -176,7 +182,7 @@ const Form = () => {
                             }
                         </OptionSection>
                     </ProjectBudget>
-                    <SubmitButton>
+                    <SubmitButton disabled={false}>
                         <span>Submit</span>
                         <span>
                             <ArrowRight size="1.8rem"/>
@@ -193,7 +199,7 @@ export default Form
 
 
 const ContactFormWrapper = styled.section`
-padding: 5vw 0 5vw 0;
+padding: 5vw 1rem 5vw 1rem;
 visibility: hidden;
 display:inline-flex;
 align-items:baseline; 
@@ -202,7 +208,7 @@ margin: 0 auto;
 `
 
 const OptionSection = styled.div`
-
+width:fit-content;
 `
 
 const Content = styled.div`
@@ -210,12 +216,7 @@ h1{
     font-weight: 600;
     letter-spacing:-1px;
     height:100px;
-    overflow:none;
-    span{
-        font-size : 5.2rem;
-        height:72px;
-        overflow: none;
-    }
+    overflow:hidden;
 }
 h2{
     font-weight : 500;
@@ -227,7 +228,7 @@ h2{
     -webkit-text-fill-color: transparent; 
     -moz-text-fill-color: transparent;
     text-overflow: -o-ellipsis-lastline;
-    font-size:3.5rem;
+    font-size:2.8rem;
     width: max-content;
     margin-bottom: 2rem;
 }
@@ -239,6 +240,8 @@ h3{
 p{
     margin: 0;
     font-weight:500;
+    text-align: justify;
+    text-justify:distribute;
 }
 `
 const FormComp = styled.div`
@@ -253,13 +256,15 @@ const Header = styled.div`
 display:flex;
 align-items: center;
 margin-bottom: 1rem;
+overflow: hidden;
+height: max-content;
 ` 
 
 const Emoji = styled.div`
 position: relative;
 overflow: hidden;
-width:5.5rem;
-height:5.5rem;
+width:5rem;
+height:5rem;
 top: -1rem;
 left: -0.1rem;
 img{
