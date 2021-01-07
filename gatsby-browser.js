@@ -48,6 +48,7 @@ body {
   font-feature-settings: "kern", "liga", "clig", "calt";
   -ms-overflow-style: none;
   scrollbar-width: none;
+  user-select: none;
 }
 
 h1 {

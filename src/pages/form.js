@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import SEO from '../components/seo'
 import styled from 'styled-components'
 import Button from '../components/ui/Button.component'
@@ -12,16 +12,22 @@ const Form = () => {
         name : {
             inputType: 'input',
             InputConfig : {
-             placeholder:"Your name",
+                placeholder:"Your name",
                 type : "text"
+            },
+            Validation : {
+                isTouched : false,
             },
             value: ''
         },
         email : {
             inputType : 'input',
             InputConfig : {
-              placeholder:"Your email",
+                placeholder:"Your email",
                 type : "text"
+            },
+            Validation : {
+                isTouched : false,
             },
             value: ''
         },
@@ -30,9 +36,14 @@ const Form = () => {
             InputConfig : {
                placeholder:"Tell us about your project",
             },
+            Validation : {
+                isTouched : false,
+            },
             value: ''
         }
-    })
+    });
+
+    const [countDown,setCountDown] = useState(false);
 
     const [options,setOPtions] = React.useState([
         "E-commerce websites",
@@ -70,6 +81,16 @@ const Form = () => {
         setForm(updatedForm);
     }
 
+    const SubmitHandler = eve => {
+        eve.preventDefault();
+        localStorage.setItem("client_send", true);
+        setCountDown(true);
+    }
+
+    useEffect(() => {
+       localStorage.clear();
+    },[countDown])
+
     let heroRef = useRef(null);
 
     let contentRef = useRef(null);
@@ -80,7 +101,7 @@ const Form = () => {
 
         const h1Content = contentRef.children[0];
 
-        console.log(h1Content);
+        console.log([...h1Content.children]); 
 
         TweenMax.to(heroRef,0,{ css : { visibility : 'visible' } });
        /* tl.from(h1Content,1,{
@@ -95,7 +116,7 @@ const Form = () => {
 
     return (
         <>
-            <SEO title="form" />
+            <SEO title="Let's Chat" />
             <ContactFormWrapper ref={ele => heroRef = ele}>
             <Content ref={el => contentRef = el}>
                     <Header>
@@ -130,7 +151,7 @@ const Form = () => {
                             })
                         }
                     </OptionSection>
-                    <form>
+                    <form onSubmit={SubmitHandler}>
                        {
                            formData.map(({data,i}) => {
                                return <Input
@@ -141,7 +162,7 @@ const Form = () => {
                            } ) 
                        }
                     <ProjectBudget>
-                        <h3>Project budget(INR)</h3>
+                        <h3>Project budget (INR)</h3>
                         <OptionSection>
                             {
                                 budgets.map(option => {
@@ -173,10 +194,12 @@ export default Form
 
 
 const ContactFormWrapper = styled.section`
-padding: 5vw 10vw 5vw 10vw;
+padding: 5vw 0 5vw 0;
 visibility: hidden;
 display:inline-flex;
 align-items:baseline; 
+justify-items : center;
+margin: 0 auto;
 `
 
 const OptionSection = styled.div`
@@ -190,7 +213,7 @@ h1{
     height:100px;
     overflow:hidden;
     span{
-        font-size : 4rem;
+        font-size : 5.2rem;
         height:72px;
         overflow: hidden;
     }
@@ -206,6 +229,8 @@ h2{
     -moz-text-fill-color: transparent;
     text-overflow: -o-ellipsis-lastline;
     font-size:3.5rem;
+    width: max-content;
+    margin-bottom: 2rem;
 }
 h3{
     font-weight : 500;
@@ -228,14 +253,16 @@ h3{
 const Header = styled.div`
 display:flex;
 align-items: center;
+margin-bottom: 1rem;
 ` 
 
 const Emoji = styled.div`
 position: relative;
 overflow: hidden;
-width:5rem;
-height:5rem;
-top: -0.5rem;
+width:5.5rem;
+height:5.5rem;
+top: -1rem;
+left: -0.1rem;
 img{
     position: absolute;
     top: 0;
