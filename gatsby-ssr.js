@@ -7,11 +7,11 @@
 // You can delete this file if you're not using it
 
 //const { ThemeProvider,createGlobalStyle } = require('styled-components')
-const { createGlobalStyle } = require('styled-components')
+const { createGlobalStyle } = require("styled-components")
 const React = require("react")
 const Layout = require("./src/components/layout").default
-const { Provider } = require('react-redux')
-const { default: store } = require('./src/store/store')
+const { Provider } = require("react-redux")
+const { default: store } = require("./src/store/store")
 
 const GlobalStyles = createGlobalStyle`
 :root{ 
@@ -20,7 +20,7 @@ const GlobalStyles = createGlobalStyle`
 html {
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
-  font: 112.5%/1.45em georgia, serif, sans-serif;
+  font: 62.5% georgia, serif, sans-serif;
   box-sizing: border-box;
   overflow-y: scroll;
 }
@@ -38,6 +38,13 @@ body {
   -webkit-font-feature-settings: "kern", "liga", "clig", "calt";
   font-feature-settings: "kern", "liga", "clig", "calt";
 }
+
+.image {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
 article,
 aside,
 details,
@@ -599,9 +606,9 @@ exports.wrapPageElement = ({ element, props }) => {
   return <Layout {...props}>{element}</Layout>
 }
 
-exports.wrapRootElement = ({ element}) => (
-   <React.Fragment>
-        <GlobalStyles />
-        {element}
-   </React.Fragment>
- )
+exports.wrapRootElement = ({ element }) => (
+  <React.Fragment>
+    <GlobalStyles />
+    {element}
+  </React.Fragment>
+)

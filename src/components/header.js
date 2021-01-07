@@ -1,32 +1,115 @@
 import { Link } from "gatsby"
 import PropTypes from "prop-types"
 import React from "react"
+import styled from "styled-components"
 
 const Header = ({ siteTitle }) => (
-  <header
-    style={{
-      background: `rebeccapurple`,
-    }}
-  >
-    <div
-      style={{
-      
-      }}
-    >
-      <h6 style={{ margin: 0 }}>
-        <Link
-          to="/"
-          style={{
-            color: `white`,
-            textDecoration: `none`,
-          }}
-        >
-          {siteTitle}
-        </Link>
-      </h6>
-    </div>
+  <header>
+    <HeaderContainer>
+      <div className="row">
+        <div class="header-content-container">
+          <div className="logo">
+            <img
+              className="image"
+              src={require("../assets/brand.png")}
+              alt="Urban UI"
+            />
+          </div>
+          <Link className="header-link" to="#about">
+            About
+          </Link>
+          <Link className="header-link" to="#career">
+            Career
+          </Link>
+          <Link className="header-link" to="#blog">
+            Blog
+          </Link>
+          <Link className="header-link btn-contact" to="#contact">
+            Contact
+          </Link>
+        </div>
+      </div>
+    </HeaderContainer>
   </header>
 )
+
+const HeaderContainer = styled.nav`
+  padding-top: 4.5rem;
+  padding-bottom: 4rem;
+  .logo {
+    width: 5rem;
+    height: 5rem;
+    overflow: hidden;
+    border-radius: 2rem;
+    margin-right: auto;
+  }
+  .header {
+    &-content-container {
+      display: flex;
+      align-items: center;
+    }
+    &-link {
+      font-size: 1.6rem;
+      padding: 2rem 2.7rem 2rem 2.7rem;
+      font-weight: 500;
+
+      &:not(:last-child) {
+        margin-right: 3rem;
+        &:hover {
+          color: crimson;
+        }
+      }
+    }
+  }
+
+  .btn {
+    &-contact {
+      // body {backface-visibility: hidden;} this imp. other wise :after might blink after hover
+      border: 1px solid #deddfe;
+      border-radius: 8px;
+      line-height: 18px;
+      color: #584fff;
+      position: relative;
+      overflow: hidden;
+      padding: 20px 36px;
+
+      &:hover {
+        color: #fff;
+        &:after {
+          width: 100%;
+        }
+      }
+
+      &::before {
+        border-radius: 8px;
+        background: #5a4fff;
+        content: "";
+        position: absolute;
+        z-index: -1;
+      }
+
+      &::after {
+        border-radius: 8px;
+        height: 100%;
+        left: 0;
+        top: 0;
+        width: 0;
+        background: #5a4fff;
+        content: "";
+        position: absolute;
+        z-index: -1;
+        -webkit-transition: all 0.3s;
+        -moz-transition: all 0.3s;
+        -o-transition: all 0.3s;
+        transition: all 0.3s;
+      }
+
+      &:active {
+        background-color: #5147e5;
+      }
+    }
+  }
+`
 
 Header.propTypes = {
   siteTitle: PropTypes.string,

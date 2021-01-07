@@ -67,11 +67,12 @@ const GlobalStyles = createGlobalStyle`
 html {
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
-  font: 112.5%/1.45em georgia, serif, sans-serif;
+  font: 62.5% georgia, serif, sans-serif;
   box-sizing: border-box;
   overflow-y: scroll;
 }
 body {
+  backface-visibility: hidden;
   width:100vw;
   height:100vh;
   overflow-x:hidden;
@@ -91,7 +92,15 @@ body {
   scrollbar-width: none;
   user-select: none;
 }
-
+.image {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+a {
+  color: var(--textbase);
+  text-decoration: none;
+}
 h1 {
   font-family : var(--font);
   font-weight: 900;
