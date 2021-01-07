@@ -23,6 +23,47 @@ const GlobalStyles = createGlobalStyle`
   --lightBlue : #80D0C7;
 }
 
+.row {
+  max-width: 114rem;
+  margin: 0 auto; }
+  .row:not(:last-child) {
+    margin-bottom: 8rem; }
+    @media only screen and (max-width: 56.25em) {
+      .row:not(:last-child) {
+        margin-bottom: 6rem; } }
+  @media only screen and (max-width: 56.25em) {
+    .row {
+      max-width: 50rem;
+      padding: 0 3rem; } }
+  .row::after {
+    content: "";
+    clear: both;
+    display: table; }
+  .row [class^="col-"] {
+    float: left; }
+    .row [class^="col-"]:not(:last-child) {
+      margin-right: 6rem; }
+      @media only screen and (max-width: 56.25em) {
+        .row [class^="col-"]:not(:last-child) {
+          margin-right: 0;
+          margin-bottom: 6rem; } }
+    @media only screen and (max-width: 56.25em) {
+      .row [class^="col-"] {
+        width: 100% !important; } }
+  .row .col-1-of-2 {
+    width: calc( (100% - 6rem) / 2); }
+  .row .col-1-of-3 {
+    width: calc( (100% - 2*(6rem) ) / 3); }
+  .row .col-1-of-4 {
+    width: calc( (100% - 3*(6rem) ) / 4); }
+  .row .col-2-of-3 {
+    width: calc( 2*( (100% - 2*(6rem) ) / 3 ) + 6rem); }
+  .row .col-2-of-4 {
+    width: calc(( 2*(100% - 3*(6rem) ) / 4 ) + 6rem); }
+  .row .col-3-of-4 {
+    width: calc( ( 3*(100% - 3*(6rem) ) / 4 ) + 2*6rem); }
+
+
 html {
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
@@ -61,7 +102,6 @@ h1 {
   padding-left: 0;
   padding-right: 0;
   padding-top: 0;
-  margin-bottom: 1.45rem;
   color: var(--textbase);
   text-rendering: optimizeLegibility;
   font-size: 5.25rem;
@@ -77,7 +117,6 @@ h2 {
   padding-left: 0;
   padding-right: 0;
   padding-top: 0;
-  margin-bottom: 1.45rem;
   color: var(--textbase);
   font-weight: ${props => props.weight || '600'};
   font-style: normal;
@@ -94,7 +133,6 @@ h3 {
   padding-left: 0;
   padding-right: 0;
   padding-top: 0;
-  margin-bottom: 1.45rem;
   color: var(--textbase);
   font-weight: 500;
   font-weight: ${props => props.weight || '500'};
@@ -110,7 +148,6 @@ h4 {
   padding-left: 0;
   padding-right: 0;
   padding-top: 0;
-  margin-bottom: 1.45rem;
   color: var(--textbase);
   font-weight: ${props => props.weight || '500'};
   font-style: normal;
@@ -127,7 +164,6 @@ h5 {
   padding-left: 0;
   padding-right: 0;
   padding-top: 0;
-  margin-bottom: 1.45rem;
   color: var(--textbase);
   font-weight: ${props => props.weight || '400'};
   text-rendering: optimizeLegibility;
@@ -142,7 +178,6 @@ h6 {
   padding-left: 0;
   padding-right: 0;
   padding-top: 0;
-  margin-bottom: 1.45rem;
   color: var(--textbase);
   font-weight: ${props => props.weight || '400'};
   text-rendering: optimizeLegibility;

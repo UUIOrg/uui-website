@@ -15,7 +15,6 @@ import '../fonts/Volte-Semibold/style.css'
 import '../fonts/Volte-Medium/style.css'
 import '../fonts/Volte-Regular/style.css'
 import '../fonts/Volte-Light/style.css'
-import styled from "styled-components"
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
