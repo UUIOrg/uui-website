@@ -3,6 +3,7 @@ import PropTypes from "prop-types"
 import React from "react"
 import styled from "styled-components"
 import Hamburger from "./ui/Hamburger.component"
+import HamburgerX from "./HamburgerX"
 import { Logo } from './utils/icons'
 
 const Header = ({ siteTitle }) => (
@@ -29,6 +30,7 @@ const Header = ({ siteTitle }) => (
             Contact
           </Link>*/}
           <Hamburger /> 
+          <HamburgerX />
         </div>
       </div>
     </HeaderContainer>
@@ -38,6 +40,9 @@ const Header = ({ siteTitle }) => (
 const HeaderContainer = styled.nav`
   padding-top: 4.5rem;
   padding-bottom: 4rem;
+  position: relative;
+  z-index: 10;
+  
   .logo {
     border-radius: 1rem;
     margin-right: auto;
