@@ -6,6 +6,7 @@ import Input from '../components/ui/Input.component'
 import { gsap } from 'gsap'
 import { ArrowRight } from '../components/utils/icons'
 import { budgetValue, requirments } from '../components/utils/options'
+import axios from 'axios'
 
 const Form = () => {
     const [clicked,setClicked] = React.useState(false);
@@ -94,8 +95,20 @@ const Form = () => {
                 localStorage.clear();
             },7000)
         }
-    },[countDown])
+    },[countDown]);
 
+    useEffect(() => {
+        (async() => {
+            const data = await axios.post(
+                "/email",
+                {
+                    email : "sssamaa789@gmail.com"
+                }
+              )
+            console.log(data);
+        })()
+    },[])
+ 
 
     useEffect(() => {
         const h1Content = contentRef.children[0];
