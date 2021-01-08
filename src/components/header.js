@@ -2,6 +2,8 @@ import { Link } from "gatsby"
 import PropTypes from "prop-types"
 import React from "react"
 import styled from "styled-components"
+import Hamburger from "./ui/Hamburger.component"
+import { Logo } from './utils/icons'
 
 const Header = ({ siteTitle }) => (
   <header>
@@ -9,13 +11,12 @@ const Header = ({ siteTitle }) => (
       <div className="row">
         <div class="header-content-container">
           <div className="logo">
-            <img
-              className="image"
-              src={require("../assets/brand.png")}
-              alt="Urban UI"
-            />
+            <Link to="/">
+              <Logo size="5rem" />
+            </Link>
+            <div>Urban <span>UI</span></div>
           </div>
-          <Link className="header-link" to="#about">
+          {/*<Link className="header-link" to="#about">
             About
           </Link>
           <Link className="header-link" to="#career">
@@ -26,7 +27,8 @@ const Header = ({ siteTitle }) => (
           </Link>
           <Link className="header-link btn-contact" to="#contact">
             Contact
-          </Link>
+          </Link>*/}
+          <Hamburger /> 
         </div>
       </div>
     </HeaderContainer>
@@ -37,22 +39,33 @@ const HeaderContainer = styled.nav`
   padding-top: 4.5rem;
   padding-bottom: 4rem;
   .logo {
-    width: 5rem;
-    height: 5rem;
-    overflow: hidden;
-    border-radius: 2rem;
+    border-radius: 1rem;
     margin-right: auto;
+    display :flex;
+    align-items : center;
+    text-transform : uppercase;
+    a{
+      margin-right : 1rem;
+    }
+    div{
+      font-weight : 300;
+      color: var(--textbase);
+      font-size: 2.5rem;
+      span{
+        font-weight : 600;
+      }
+    }
   }
   .header {
     &-content-container {
       display: flex;
       align-items: center;
+      justify-content: space-between;
     }
     &-link {
       font-size: 1.6rem;
       padding: 2rem 2.7rem 2rem 2.7rem;
       font-weight: 500;
-
       &:not(:last-child) {
         margin-right: 3rem;
         &:hover {

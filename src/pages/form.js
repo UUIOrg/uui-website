@@ -64,6 +64,7 @@ const Form = () => {
 
     let heroRef = useRef(null);
     let contentRef = useRef(null);
+    let h2Ref = useRef(null); 
 
 
     let formData = [];
@@ -97,26 +98,59 @@ const Form = () => {
 
 
     useEffect(() => {
-
         const h1Content = contentRef.children[0];
+        const h2Content = h1Content.nextSibling;
+        const h3Content = h2Content.nextSibling;
 
-        console.log([...h1Content.children]); 
+        console.log(h3Content); 
 
+        gsap.set(heroRef,{
+            css: {
+              visibility : 'visible'
+            }
+          })
         gsap.timeline()
-            .set(heroRef,
-                { css : 
-                    { visibility : 'visible' } 
-                })
-            .from([...h1Content.children],{
-                y: 72,
+            .from(h1Content.children[0],{
+                y: 150,
                 duration: 1,
                 ease: 'power4',
-                stagger:{
-                  amount: 0.3,
-                  from: 'start'
-                }
+                delay: 0.2
               }
-            )
+            ).from(h1Content.children[1],{
+                opacity: 0,
+                duration: 1,
+                ease: 'power4',
+            },"-=0.4")
+            .from(h2Content,{
+                y: 30,
+                opacity: 0,
+                duration:1,
+                ease: 'power4',
+                stagger:{
+                  amount: 1,
+                  from: 'start'
+                } 
+            },"-=1.2")
+            .from(h3Content.children[0],{
+                y: 30,
+                opacity: 0,
+                duration:1,
+                ease: 'power4',
+                stagger:{
+                    amount: 1,
+                    from: 'start'
+                } 
+            },"-=1")
+            .from(h3Content.children[1],{
+                y: 30,
+                opacity: 0,
+                duration:1.5,
+                ease: 'power4',
+                stagger:{
+                    amount: 1,
+                    from: 'start'
+                } 
+            },"-=0.8")
     },[])
 
     return (
@@ -132,7 +166,7 @@ const Form = () => {
                             <img src={require("../images/hands.gif")} alt="wavers"/>
                         </Emoji>
                     </Header>
-                    <h2><span>Feel free to tell us what</span> <br />  <span>exactly you want.</span></h2>
+                    <h2 ref={el => h2Ref = el}><span>Feel free to tell us what</span> <br />  <span>exactly you want.</span></h2>
                     <div>
                         <h3>Not sure where to start from ?</h3>
                         <p>
@@ -185,7 +219,7 @@ const Form = () => {
                     <SubmitButton disabled={false}>
                         <span>Submit</span>
                         <span>
-                            <ArrowRight size="1.8rem"/>
+                            <ArrowRight size="3rem"/>
                         </span>
                     </SubmitButton>
                     </form>
@@ -208,15 +242,15 @@ margin: 0 auto;
 `
 
 const OptionSection = styled.div`
-width:fit-content;
+max-width:100%;
 `
 
 const Content = styled.div`
 h1{
     font-weight: 600;
     letter-spacing:-1px;
-    height:100px;
     overflow:hidden;
+    margin-bottom: 0;
 }
 h2{
     font-weight : 500;
@@ -227,15 +261,19 @@ h2{
     -moz-background-clip: text;
     -webkit-text-fill-color: transparent; 
     -moz-text-fill-color: transparent;
-    text-overflow: -o-ellipsis-lastline;
-    font-size:2.8rem;
     width: max-content;
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
+    overflow: hidden;
+    padding:0;
+    height: max-content;
+    span{
+
+    }
 }
 h3{
     font-weight : 500;
-    font-size: 1.2rem;
-    margin-bottom:0.8rem;
+    margin-bottom:1rem;
+    font-size: 2rem;
 }
 p{
     margin: 0;
@@ -249,23 +287,25 @@ margin-left : 5rem;
 max-width: 780px;
 h3{
     color : var(--text2);
-    font-size : 1.5rem;
+    font-size : 2rem;
 }
 `
 const Header = styled.div`
 display:flex;
 align-items: center;
-margin-bottom: 1rem;
+align-content:center;
+margin-bottom: 3rem;
 overflow: hidden;
+padding:0;
 height: max-content;
 ` 
 
 const Emoji = styled.div`
 position: relative;
 overflow: hidden;
-width:5rem;
-height:5rem;
-top: -1rem;
+width:8rem;
+height:8rem;
+top: -0.5rem;
 left: -0.1rem;
 img{
     position: absolute;
@@ -291,12 +331,11 @@ display:flex;
 align-items: center;
 margin-top: 3rem;
 width:max-content;
-
 &::before{
     content : '';
     background-color : var(--text2);
     height: 2px;
-    width: 30px; 
+    width:  3rem;
     margin-right : 10px; 
     transition: 0.3s all;
 }
@@ -311,7 +350,7 @@ span{
         margin-left : 10px;
         background-color:var(--textbase);
         color : #fff;
-        padding: 0.5rem;
+        padding: 1rem;
         border-radius: 50%;
 
     }

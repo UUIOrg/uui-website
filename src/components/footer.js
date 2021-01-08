@@ -6,7 +6,7 @@ const footer = props => {
   return (
     <FooterContainer>
       <div className="row">
-      <h2 className="footer__title default">Got an Idea?</h2>
+        <h1 className="footer__title default">Got an Idea?</h1>
         <h2 className="footer__title--extend border">Let us give it shape.</h2>
 
         <div className="footer__bottom">
@@ -45,9 +45,7 @@ const FooterContainer = styled.div`
     width: 100%;
   }
   font-family: "Volte";
-  h2 {
-    &:first-child {
-      font-weight: 500;
+  h1{
       background-color: #f3ec78;
       background-image: linear-gradient(
         120deg,
@@ -61,11 +59,10 @@ const FooterContainer = styled.div`
       -webkit-text-fill-color: transparent;
       -moz-text-fill-color: transparent;
       text-overflow: -o-ellipsis-lastline;
-      font-size: 4rem;
-    }
-    &:last-child {
+      margin-bottom:2rem;
+  }
+  h2 {
       font-weight: 400;
-    }
   }
   background-color: var(--textbase);
 

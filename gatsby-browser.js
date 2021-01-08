@@ -1,10 +1,3 @@
-/**
- * Implement Gatsby's Browser APIs in this file.
- *
- * See: https://www.gatsbyjs.com/docs/browser-apis/
- */
-
-// You can delete this file if you're not using it
 
 
 const { createGlobalStyle } = require('styled-components')
@@ -24,7 +17,7 @@ const GlobalStyles = createGlobalStyle`
 }
 
 .row {
-  max-width: 114rem;
+  max-width: 130rem;
   margin: 0 auto; }
   .row:not(:last-child) {
     margin-bottom: 8rem; }
@@ -91,6 +84,7 @@ body {
   -ms-overflow-style: none;
   scrollbar-width: none;
   user-select: none;
+  font-size: 1.8rem;
 }
 .image {
   width: 100%;
@@ -114,7 +108,7 @@ h1 {
   padding-top: 0;
   color: var(--textbase);
   text-rendering: optimizeLegibility;
-  font-size: 5rem;
+  font-size: 7.5rem;
   line-height: 1.1;
   font-weight: ${props => props.weight || '700'};
   font-style: normal;
@@ -132,7 +126,7 @@ h2 {
   font-style: normal;
   font-weight: bold;
   text-rendering: optimizeLegibility;
-  font-size: 3.62671rem;
+  font-size: 5.5rem;
   line-height: 1.1;
 }
 h3 {
@@ -147,7 +141,7 @@ h3 {
   font-weight: 500;
   font-weight: ${props => props.weight || '500'};
   text-rendering: optimizeLegibility;
-  font-size: 1.4;
+  font-size: 3rem;
   line-height: 1.1;
 }
 h4 {
@@ -163,7 +157,7 @@ h4 {
   font-style: normal;
   font-weight: bold;
   text-rendering: optimizeLegibility;
-  font-size: 1rem;
+  font-size: 2.5rem;
   line-height: 1.1;
 }
 h5 {
@@ -177,7 +171,7 @@ h5 {
   color: var(--textbase);
   font-weight: ${props => props.weight || '400'};
   text-rendering: optimizeLegibility;
-  font-size: 0.85028rem;
+  font-size: 2rem;
   line-height: 1.1;
 }
 h6 {
@@ -191,7 +185,7 @@ h6 {
   color: var(--textbase);
   font-weight: ${props => props.weight || '400'};
   text-rendering: optimizeLegibility;
-  font-size: 0.78405rem;
+  font-size: 1.5rem;
   line-height: 1.1;
 }
 p,div,section,main{
@@ -201,6 +195,12 @@ p,div,section,main{
    -webkit-box-orient: vertical;
    -webkit-line-clamp: N; 
 }
+
+button{
+  color : var(--text2);
+  font-size: 2rem;
+}
+
 ::-webkit-scrollbar {
   display: none;
 }
