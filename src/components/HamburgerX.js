@@ -1,11 +1,66 @@
-import React from "react"
+import React, { useRef } from "react"
 import styled from "styled-components"
 import { Link } from "gatsby"
+import { gsap } from 'gsap';
 
-const Hamburger = props => {
+const Hamburger = ({state}) => {
+
+  let heroRef = useRef(null);
+  let navRef = useRef(null);
+  let infoRef = useRef(null);
+
+
+  React.useEffect(() => {
+
+    const navChildren = navRef.children;
+
+    console.log(heroRef.children[1]);
+
+    gsap.set(heroRef,{
+      css : {
+        visibility : 'visible'
+      }
+    })
+
+    if(state){
+      gsap.timeline()
+      .from([heroRef.children[0],heroRef.children[1]],{
+        delay : 0.5,
+        height : "0%",
+        ease: 'power4.inOut',
+        duration: 1,
+        stagger : {
+          amount : 0.1
+        }
+      })
+      .from([navChildren[0].firstChild,navChildren[1].firstChild,navChildren[2].firstChild,navChildren[3].firstChild],{
+        delay : 0.5,
+        skewY: 10,
+        y: navChildren[0].offsetHeight,
+        opacity : 0,
+        stagger:{
+          amount : 0.4,
+        }
+      })
+      .from([...infoRef.children],{
+        y: infoRef.offsetHeight,
+        opacity : 0,
+        stagger:{
+          amount : 0.4,
+        }
+      },"=-.3")
+    }
+  
+    /**/
+    
+
+   
+
+  },[])
+
   return (
-    <HamburgerMenu>
-      <div className="menu-sec-backcol"></div>
+    <HamburgerMenu ref={ele => heroRef = ele }>
+      <div className="menu-sec-backcol" ></div>
 
       <div className="menu-layer">
         <div className="menu-city-background"></div>
@@ -13,36 +68,36 @@ const Hamburger = props => {
           <div className="wrapper">
             <div className="menu-links">
               <nav>
-                <ul>
-                  <li>
-                    <Link to="/">Opportunities</Link>
-                  </li>
-                  <li>
-                    <Link to="/solutions">Solutions</Link>
-                  </li>
-                  <li>
+                <div className="nav-routes" ref={ele => navRef = ele}>
+                  <h1>
+                    <Link to="/">About</Link>
+                  </h1>
+                  <h1>
+                    <Link to="/">Solutions</Link>
+                  </h1>
+                  <h1>
+                    <Link to="/">Testimonials</Link>
+                  </h1>
+                  <h1>
                     <Link to="/form">Contact us</Link>
-                  </li>
-                </ul>
+                  </h1>
+                </div>
               </nav>
               <div className="info">
-              <h3>Our Promise</h3>
-              <p>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                Tenetur odit aliquam cum modi veritatis, aperiam commodi
-                perferendis, rerum provident non assumenda, laudantium quasi
-                nostrum. Reiciendis sit minus architecto dolores magnam?
-              </p>
-            </div>
+                <h3>Our Promise</h3>
+                <p>
+                Our team promises to listen to each and every demand of yours, while developing your required product. We understand the gravity of the responsibility that you give us.
+                </p>
+              </div>
             </div>
             
-            <div className="locations">
-              Locations:
-              <span>Kolkata</span>
-              <span>Bengaluru</span>
-              <span>Chennnai</span>
-              <span>Hyderabad</span>
-              <span>Delhi</span>
+            <div className="locations" ref={el => infoRef = el}>
+              Follow us :
+              <span>Facebook</span>
+              <span>LinkedIn</span>
+              <span>Twitter</span>
+              <span>Behance</span>
+              <span>Github</span>
             </div>
           </div>
         </div>
@@ -61,9 +116,13 @@ const HamburgerMenu = styled.div`
   position: fixed;
   height: 100%;
   width: 100%;
+  visibility: hidden;
+  backface-visibility: hidden;
 
   .menu-sec-backcol {
-    background-color: #000;
+    background-color: #f3ec78;
+    background-image: linear-gradient(120deg, var(--lightBlue), var(--deepBlue));
+    background-size: 100%;
     z-index: -1;
     top: 0;
     bottom: 0;
@@ -76,7 +135,7 @@ const HamburgerMenu = styled.div`
 
   .menu-layer {
     position: relative;
-    background: red;
+    background: var(--textbase);
     height: 100%;
     overflow: hidden;
     .menu-city-background {
@@ -101,24 +160,34 @@ const HamburgerMenu = styled.div`
         top: 200px;
         nav {
           display: block;
-          ul {
+          margin-bottom : 6rem;
+          .nav-routes {
             padding: 0;
             margin: 0;
-            li {
-              list-style: none;
-              font-size: 6rem;
+            h1 {
               font-weight: 700;
-              cursor: pointer;
-              height: 135px;
-              overflow: hidden;
+              margin-bottom: 3rem;
+              font-size : 9rem;
               position: relative;
+              height: 100px;
+              overflow: hidden;
               width: 700px;
+              backface-visibility: hidden;
               a {
                 position: absolute;
+                cursor: pointer;
+                width: fit-content;
                 color: #fff;
                 text-decoration: none;
+                height: inherit;
                 &:hover {
-                  color: #000;
+                  background-color: #f3ec78;
+                  background-image: linear-gradient(120deg, var(--lightBlue), var(--deepBlue));
+                  background-size: 100%;
+                  -webkit-background-clip: text;
+                  -moz-background-clip: text;
+                  -webkit-text-fill-color: transparent; 
+                  -moz-text-fill-color: transparent;
                 }
               }
             }
@@ -132,12 +201,12 @@ const HamburgerMenu = styled.div`
           font-weight: 600;
           text-align: left;
           font-size: 1.6rem;
-          margin: 8px;
+          margin: 8px 0;
         }
         p {
-          color: #fff !important;
           margin: 0;
           font-size: 1rem;
+          color : var(--text2);
         }
       }
       }
@@ -152,15 +221,33 @@ const HamburgerMenu = styled.div`
         span {
           &:first-child {
             margin-left: 64px;
+            &:hover{
+              color : #4267B2;
+            }
+          }
+          &:nth-child(2){
+            &:hover{
+              color :  #0e76a8;
+            }
+          }
+          &:nth-child(3){
+            &:hover{
+              color :  #1DA1F2;
+            }
+          }
+           &:nth-child(4){
+            &:hover{
+              color :  #053eff;
+            }
+          }
+          &:nth-child(5){
+            &:hover{
+              color :  #fafafa;
+            }
           }
           cursor: pointer;
           margin: 0 32px;
           transition: 0.3s ease-in-out;
-          &:hover {
-            background: #000;
-            padding: 8px 24px;
-            border-radius: 4px;
-          }
         }
       }
     }

@@ -72,8 +72,8 @@ body {
   font-family : var(--font);
   color : var(--text2);
   margin: 0;
-  -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
   color: hsla(0, 0%, 0%, 0.8);
   word-wrap: break-word;
   font-kerning: normal;

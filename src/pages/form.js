@@ -124,7 +124,7 @@ const Form = () => {
           })
         gsap.timeline()
             .from(h1Content.children[0],{
-                y: 150,
+                y: h1Content.children[0].offsetHeight,
                 duration: 1,
                 ease: 'power4',
                 delay: 0.2
@@ -170,7 +170,7 @@ const Form = () => {
         <>
             <SEO title="Let's Chat" />
             <ContactFormWrapper ref={ele => heroRef = ele}>
-            <Content ref={el => contentRef = el}>
+                <Content ref={el => contentRef = el}>
                     <Header>
                         <h1>
                            <span>Hey there!</span>
@@ -300,7 +300,7 @@ margin-left : 5rem;
 max-width: 780px;
 h3{
     color : var(--text2);
-    font-size : 2rem;
+    
 }
 `
 const Header = styled.div`

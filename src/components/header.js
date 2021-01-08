@@ -1,45 +1,52 @@
 import { Link } from "gatsby"
 import PropTypes from "prop-types"
-import React from "react"
+import React, { useState } from "react"
 import styled from "styled-components"
 import Hamburger from "./ui/Hamburger.component"
 import HamburgerX from "./HamburgerX"
 import { Logo } from './utils/icons'
+import gsap from "gsap"
 
-const Header = ({ siteTitle }) => (
-  <header>
-    <HeaderContainer>
-      <div className="row">
-        <div class="header-content-container">
-          <div className="logo">
-            <Link to="/">
-              <Logo size="5rem" />
+const Header = ({ siteTitle }) => {
+
+  const [open,setOpen] = useState(false);
+
+  return  (
+    <header>
+      <HeaderContainer>
+        <div className="row">
+          <div class="header-content-container">
+            <div className="logo">
+              <Link to="/">
+                <Logo size="5rem" />
+              </Link>
+              <div>Urban <span>UI</span></div>
+            </div>
+            {/*<Link className="header-link" to="#about">
+              About
             </Link>
-            <div>Urban <span>UI</span></div>
+            <Link className="header-link" to="#career">
+              Career
+            </Link>
+            <Link className="header-link" to="#blog">
+              Blog
+            </Link>
+            <Link className="header-link btn-contact" to="#contact">
+              Contact
+            </Link>*/}
+            <Hamburger
+            burger={open} 
+            onClick={() => setOpen(!open)}/> 
+            {open && <HamburgerX state={open}/> }
           </div>
-          {/*<Link className="header-link" to="#about">
-            About
-          </Link>
-          <Link className="header-link" to="#career">
-            Career
-          </Link>
-          <Link className="header-link" to="#blog">
-            Blog
-          </Link>
-          <Link className="header-link btn-contact" to="#contact">
-            Contact
-          </Link>*/}
-          <Hamburger /> 
-          <HamburgerX />
         </div>
-      </div>
-    </HeaderContainer>
-  </header>
-)
+      </HeaderContainer>
+    </header>
+  )
+}
 
 const HeaderContainer = styled.nav`
-  padding-top: 4.5rem;
-  padding-bottom: 4rem;
+  padding: 4rem 10px;
   position: relative;
   z-index: 10;
   
