@@ -3,6 +3,7 @@ import express from "express"
 import dotenv from "dotenv"
 import email from "./routes/email.js"
 import connectDB from "./config/db.js"
+import {responseFilter} from "./controllers/responseController.js"
 
 dotenv.config()
 
@@ -21,6 +22,7 @@ app.get("/", (req, res) => {
 })
 
 app.use("/email", email)
+app.use("/response", responseFilter)
 
 const PORT = process.env.PORT || 5000
 
