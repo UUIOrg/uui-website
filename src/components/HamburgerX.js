@@ -52,7 +52,7 @@ const Hamburger = props => {
 }
 
 const HamburgerMenu = styled.div`
-  /* display: none; */
+  display: none;
   z-index: 9;
   top: 0;
   bottom: 0;

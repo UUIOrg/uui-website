@@ -1,5 +1,6 @@
 import morgan from "morgan"
 import express from "express"
+import cors from "cors"
 import dotenv from "dotenv"
 import email from "./routes/email.js"
 import connectDB from "./config/db.js"
@@ -10,7 +11,9 @@ dotenv.config()
 connectDB()
 
 const app = express()
+app.use(cors());
 
+app.options('*', cors());
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"))
 }

@@ -6,7 +6,9 @@ export const responseFilter = asyncHandler(async (req, res) => {
   const exist = await EmailResponse.findOne({ email: req.body.email })
 
   if (exist) {
-    const dateToCompare = exist.createdAt ? exist.createdAt > exist.updatedAt : exist.updatedAt
+    const dateToCompare =  exist.createdAt > exist.updatedAt ? exist.createdAt : exist.updatedAt
+    console.log(dateToCompare)
+    console.log(new Date())
     const existTime = dateToCompare
     const currentTime = new Date()
 
@@ -29,9 +31,9 @@ export const responseFilter = asyncHandler(async (req, res) => {
     })
 
     // for example: {year:0,month:0,week:1,day:2,hour:34,minute:56,second:7}
-    // console.log(r)
+    console.log(r)
     if ((r.year === 0 && r.month === 0 && r.week === 0, r.day === 0)) {
-      res.status(400).json({
+      res.status(200).json({
         status: "failed",
         data: {
           message: "You may reach us after 24 hours after.",
