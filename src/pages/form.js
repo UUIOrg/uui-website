@@ -98,6 +98,7 @@ const Form = () => {
         } catch(error) {
             console.log(error);
         }
+        api();
     }
 
     useEffect(() => {
