@@ -57,8 +57,6 @@ const Form = () => {
         }
     });
 
-    const [countDown,setCountDown] = useState(false);
-
     const [ options,setOPtions ] = React.useState(requirments)
 
     const [ budgets,setBudget ] = React.useState(budgetValue);
@@ -69,6 +67,8 @@ const Form = () => {
 
 
     let formData = [];
+    let formOptions = [];
+    let BudgetArray = [];
 
     for(let i in form){
         formData.push({data : form[i],i})
@@ -86,16 +86,21 @@ const Form = () => {
     const SubmitHandler = eve => {
         eve.preventDefault();
         localStorage.setItem("client_send", true);
-        setCountDown(true);
+    }
+
+    const Optionhandler = (opt,id,arr,reqs,setState) => {
+        const updatedFormOpt = [...reqs];
+        const updatedFormEle = { ...updatedFormOpt[id] };
+        updatedFormEle.state = !reqs[id].state;
+        arr.push(opt);
+        updatedFormOpt[id] = updatedFormEle;;
+        setState(updatedFormOpt);
+        console.log(arr)
     }
 
     useEffect(() => {
-        if(countDown){
-            setTimeout(() => {
-                localStorage.clear();
-            },7000)
-        }
-    },[countDown]);
+       
+    },[]);
 
     useEffect(() => {
         (async() => {
@@ -192,12 +197,14 @@ const Form = () => {
                     <h3>Choose your requirments...</h3>
                     <OptionSection>
                         {
-                            options.map(option => {
+                            options.map(({option},id) => {
                                 return <Button
+                                key={option}
                                 border="1px solid rgba(0, 0, 0, 0.1)"
                                 color="var(--textbase)"
                                 margin={"0 1rem 1rem 0"}
-                                key={option}>
+                                onClick={() => Optionhandler(option,id,formOptions,options,setOPtions)}
+                                >
                                     {option}
                                 </Button>
                             })
@@ -217,13 +224,13 @@ const Form = () => {
                         <h3>Project budget (INR)</h3>
                         <OptionSection>
                             {
-                                budgets.map(option => {
+                                budgets.map(({requirment},id) => {
                                     return <Button
                                     border="1px solid rgba(0, 0, 0, 0.1)"
                                     color="var(--textbase)"
                                     margin={"0 1rem 1rem 0"}
-                                    key={option}>
-                                        {option}
+                                    key={requirment}>
+                                        {requirment}
                                     </Button>
                                 })
                             }

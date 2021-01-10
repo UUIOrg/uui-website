@@ -22,7 +22,7 @@ const Header = ({ siteTitle }) => {
               </Link>
               <div>Urban <span>UI</span></div>
             </div>
-            {/*<Link className="header-link" to="#about">
+            <Link className="header-link" to="#about">
               About
             </Link>
             <Link className="header-link" to="#career">
@@ -33,7 +33,7 @@ const Header = ({ siteTitle }) => {
             </Link>
             <Link className="header-link btn-contact" to="#contact">
               Contact
-            </Link>*/}
+            </Link>
             <Hamburger
             burger={open} 
             onClick={() => setOpen(!open)}/> 
@@ -107,7 +107,7 @@ const HeaderContainer = styled.nav`
 
       &::before {
         border-radius: 8px;
-        background: #5a4fff;
+        background: var(--textbase);
         content: "";
         position: absolute;
         z-index: -1;
@@ -119,14 +119,14 @@ const HeaderContainer = styled.nav`
         left: 0;
         top: 0;
         width: 0;
-        background: #5a4fff;
+        background: var(--textbase);
         content: "";
         position: absolute;
         z-index: -1;
-        -webkit-transition: all 0.3s;
-        -moz-transition: all 0.3s;
-        -o-transition: all 0.3s;
-        transition: all 0.3s;
+        -webkit-transition: all 0.4s;
+        -moz-transition: all 0.4s;
+        -o-transition: all 0.4s;
+        transition: all 0.4s;
       }
 
       &:active {

@@ -20,7 +20,7 @@ if (process.env.NODE_ENV === 'development') {
 
   app.use('/email', email )
 
-  const PORT = process.env.PORT || 5000
+  const PORT = process.env.PORT || 8081
 
 app.listen(
   PORT,

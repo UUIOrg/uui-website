@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const Hamburger = ({state,onClick}) => {
     return (
-        <Menu className={state ? ` open`: ``}
+        <Menu BgCol={!state ? "#000" : "#FFF"}
         onClick={onClick}>
             <div className="line-menu half start"></div>
             <div className="line-menu"></div>
@@ -23,14 +23,12 @@ const Menu = styled.div`
   cursor: pointer;
   transition: transform 330ms ease-out;
   z-index : 10000;
-  mix-blend-mode : difference;
-
 &.open {
   transform: rotate(-45deg);  
 }
 
 .line-menu {
-  background-color: #000;
+  background-color: ${props => props.BgCol};
   border-radius: 50px;
   width: 100%;
   height: 4px;

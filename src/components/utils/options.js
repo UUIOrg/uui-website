@@ -8,7 +8,10 @@ export const requirments = [
     "App design",
     "Logo design",
     "Poster Design"
-]
+].map(option => ({
+    option,
+    state : false
+}))
 
 export const budgetValue = [
     "< 10k",
@@ -16,4 +19,7 @@ export const budgetValue = [
     "20-30k",
     "40-50k",
     "> 50k"
-]
+].map(requirment => ({
+    requirment,
+    state : false
+}))
