@@ -5,6 +5,7 @@ const React = require("react")
 const Layout = require("./src/components/layout").default
 const { Provider } = require('react-redux')
 const { default :{ store } } = require('./src/store/store');
+const { default: Cursor } = require('./src/components/ui/Cursor.component');
 
 const GlobalStyles = createGlobalStyle`
 :root{
@@ -68,12 +69,13 @@ body {
   backface-visibility: hidden;
   width:100vw;
   height:100vh;
+  
   overflow-x:hidden;
   font-family : var(--font);
   color : var(--text2);
   margin: 0;
-  -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
   color: hsla(0, 0%, 0%, 0.8);
   word-wrap: break-word;
   font-kerning: normal;
@@ -213,6 +215,7 @@ exports.wrapPageElement = ({ element, props }) => {
 exports.wrapRootElement = ({ element}) => (
   <React.Fragment>
        <GlobalStyles />
+       <Cursor />
        {element}
   </React.Fragment>
 )

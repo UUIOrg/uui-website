@@ -1,12 +1,12 @@
-import React, { useEffect, useRef, useState } from "react"
-import SEO from "../components/seo"
-import styled from "styled-components"
-import Button from "../components/ui/Button.component"
-import Input from "../components/ui/Input.component"
-import { gsap } from "gsap"
-import { ArrowRight } from "../components/utils/icons"
-import { budgetValue, requirments } from "../components/utils/options"
-import axios from "axios"
+import React, { useEffect, useRef, useState } from 'react'
+import SEO from '../components/seo'
+import styled from 'styled-components'
+import Button from '../components/ui/Button.component'
+import Input from '../components/ui/Input.component'
+import { gsap } from 'gsap'
+import { ArrowRight } from '../components/utils/icons'
+import { budgetValue, requirments } from '../components/utils/options'
+import axios from 'axios'
 
 const Form = () => {
   const [clicked, setClicked] = React.useState(false)
@@ -100,14 +100,26 @@ const Form = () => {
         }
     }
 
-    api()
+    useEffect(() => {
+        if(countDown){
+            setTimeout(() => {
+                localStorage.clear();
+            },7000)
+        }
+    },[countDown]);
 
-    if (countDown) {
-      setTimeout(() => {
-        localStorage.clear()
-      }, 7000)
-    }
-  }, [countDown])
+    useEffect(() => {
+        (async() => {
+            const data = await axios.post(
+                "/email",
+                {
+                    email : "sssamaa789@gmail.com"
+                }
+              )
+            console.log(data);
+        })()
+    },[])
+ 
 
   useEffect(() => {
     const h1Content = contentRef.children[0]
@@ -116,152 +128,129 @@ const Form = () => {
 
     console.log(h3Content)
 
-    gsap.set(heroRef, {
-      css: {
-        visibility: "visible",
-      },
-    })
-    gsap
-      .timeline()
-      .from(h1Content.children[0], {
-        y: 150,
-        duration: 1,
-        ease: "power4",
-        delay: 0.2,
-      })
-      .from(
-        h1Content.children[1],
-        {
-          opacity: 0,
-          duration: 1,
-          ease: "power4",
-        },
-        "-=0.4"
-      )
-      .from(
-        h2Content,
-        {
-          y: 30,
-          opacity: 0,
-          duration: 1,
-          ease: "power4",
-          stagger: {
-            amount: 1,
-            from: "start",
-          },
-        },
-        "-=1.2"
-      )
-      .from(
-        h3Content.children[0],
-        {
-          y: 30,
-          opacity: 0,
-          duration: 1,
-          ease: "power4",
-          stagger: {
-            amount: 1,
-            from: "start",
-          },
-        },
-        "-=1"
-      )
-      .from(
-        h3Content.children[1],
-        {
-          y: 30,
-          opacity: 0,
-          duration: 1.5,
-          ease: "power4",
-          stagger: {
-            amount: 1,
-            from: "start",
-          },
-        },
-        "-=0.8"
-      )
-  }, [])
+        gsap.set(heroRef,{
+            css: {
+              visibility : 'visible'
+            }
+          })
+        gsap.timeline()
+            .from(h1Content.children[0],{
+                y: h1Content.children[0].offsetHeight,
+                duration: 1,
+                ease: 'power4',
+                delay: 0.2
+              }
+            ).from(h1Content.children[1],{
+                opacity: 0,
+                duration: 1,
+                ease: 'power4',
+            },"-=0.4")
+            .from(h2Content,{
+                y: 30,
+                opacity: 0,
+                duration:1,
+                ease: 'power4',
+                stagger:{
+                  amount: 1,
+                  from: 'start'
+                } 
+            },"-=1.2")
+            .from(h3Content.children[0],{
+                y: 30,
+                opacity: 0,
+                duration:1,
+                ease: 'power4',
+                stagger:{
+                    amount: 1,
+                    from: 'start'
+                } 
+            },"-=1")
+            .from(h3Content.children[1],{
+                y: 30,
+                opacity: 0,
+                duration:1.5,
+                ease: 'power4',
+                stagger:{
+                    amount: 1,
+                    from: 'start'
+                } 
+            },"-=0.8")
+    },[])
 
-  return (
-    <>
-      <SEO title="Let's Chat" />
-      <ContactFormWrapper ref={ele => (heroRef = ele)}>
-        <Content ref={el => (contentRef = el)}>
-          <Header>
-            <h1>
-              <span>Hey there!</span>
-            </h1>
-            <Emoji>
-              <img src={require("../images/hands.gif")} alt="wavers" />
-            </Emoji>
-          </Header>
-          <h2 ref={el => (h2Ref = el)}>
-            <span>Feel free to tell us what</span> <br />{" "}
-            <span>exactly you want.</span>
-          </h2>
-          <div>
-            <h3>Not sure where to start from ?</h3>
-            <p>
-              <span>You can tell us about your startup, your company, </span>
-              <br />
-              <span>your business or your product.</span>
-            </p>
-          </div>
-        </Content>
-        <FormComp>
-          <h3>Choose your requirments...</h3>
-          <OptionSection>
-            {options.map(option => {
-              return (
-                <Button
-                  border="1px solid rgba(0, 0, 0, 0.1)"
-                  color="var(--textbase)"
-                  margin={"0 1rem 1rem 0"}
-                  key={option}
-                >
-                  {option}
-                </Button>
-              )
-            })}
-          </OptionSection>
-          <form onSubmit={SubmitHandler}>
-            {formData.map(({ data, i }) => {
-              return (
-                <Input
-                  key={i}
-                  onChange={eve => onChangeHandler(eve, i)}
-                  {...data}
-                />
-              )
-            })}
-            <ProjectBudget>
-              <h3>Project budget (INR)</h3>
-              <OptionSection>
-                {budgets.map(option => {
-                  return (
-                    <Button
-                      border="1px solid rgba(0, 0, 0, 0.1)"
-                      color="var(--textbase)"
-                      margin={"0 1rem 1rem 0"}
-                      key={option}
-                    >
-                      {option}
-                    </Button>
-                  )
-                })}
-              </OptionSection>
-            </ProjectBudget>
-            <SubmitButton disabled={false}>
-              <span>Submit</span>
-              <span>
-                <ArrowRight size="3rem" />
-              </span>
-            </SubmitButton>
-          </form>
-        </FormComp>
-      </ContactFormWrapper>
-    </>
-  )
+    return (
+        <>
+            <SEO title="Let's Chat" />
+            <ContactFormWrapper ref={ele => heroRef = ele}>
+                <Content ref={el => contentRef = el}>
+                    <Header>
+                        <h1>
+                           <span>Hey there!</span>
+                        </h1>
+                        <Emoji>
+                            <img src={require("../images/hands.gif")} alt="wavers"/>
+                        </Emoji>
+                    </Header>
+                    <h2 ref={el => h2Ref = el}><span>Feel free to tell us what</span> <br />  <span>exactly you want.</span></h2>
+                    <div>
+                        <h3>Not sure where to start from ?</h3>
+                        <p>
+                            <span>You can tell us about your startup, your company, </span>
+                            <br /><span>your business or your product.</span>
+                        </p>
+                    </div>
+                </Content>
+                <FormComp>
+                    <h3>Choose your requirments...</h3>
+                    <OptionSection>
+                        {
+                            options.map(option => {
+                                return <Button
+                                border="1px solid rgba(0, 0, 0, 0.1)"
+                                color="var(--textbase)"
+                                margin={"0 1rem 1rem 0"}
+                                key={option}>
+                                    {option}
+                                </Button>
+                            })
+                        }
+                    </OptionSection>
+                    <form onSubmit={SubmitHandler}>
+                       {
+                           formData.map(({data,i}) => {
+                               return <Input
+                               key={i}
+                               onChange={eve => onChangeHandler(eve,i)}
+                               {...data}
+                               />
+                           } ) 
+                       }
+                    <ProjectBudget>
+                        <h3>Project budget (INR)</h3>
+                        <OptionSection>
+                            {
+                                budgets.map(option => {
+                                    return <Button
+                                    border="1px solid rgba(0, 0, 0, 0.1)"
+                                    color="var(--textbase)"
+                                    margin={"0 1rem 1rem 0"}
+                                    key={option}>
+                                        {option}
+                                    </Button>
+                                })
+                            }
+                        </OptionSection>
+                    </ProjectBudget>
+                    <SubmitButton disabled={false}>
+                        <span>Submit</span>
+                        <span>
+                            <ArrowRight size="3rem"/>
+                        </span>
+                    </SubmitButton>
+                    </form>
+                </FormComp>
+            </ContactFormWrapper>
+        </>
+    )
 }
 
 export default Form
@@ -320,12 +309,12 @@ const Content = styled.div`
   }
 `
 const FormComp = styled.div`
-  margin-left: 5rem;
-  max-width: 780px;
-  h3 {
-    color: var(--text2);
-    font-size: 2rem;
-  }
+margin-left : 5rem;
+max-width: 780px;
+h3{
+    color : var(--text2);
+    
+}
 `
 const Header = styled.div`
   display: flex;

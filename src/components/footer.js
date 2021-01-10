@@ -7,7 +7,7 @@ const footer = props => {
     <FooterContainer>
       <div className="row">
         <h1 className="footer__title default">Got an Idea?</h1>
-        <h2 className="footer__title--extend border">Let us give it shape.</h2>
+        <h2 className="footer__title--extend">Let us give it shape.</h2>
 
         <div className="footer__bottom">
           <div className="footer__contact">
@@ -17,7 +17,7 @@ const footer = props => {
             >
               urbui0221@gmail.com
             </Link>
-            <h4 className="default location">Kolkata | India</h4>
+            <h6 className="default location">Kolkata | India</h6>
           </div>
 
           <div className="social__links">
@@ -60,6 +60,7 @@ const FooterContainer = styled.div`
       -moz-text-fill-color: transparent;
       text-overflow: -o-ellipsis-lastline;
       margin-bottom:2rem;
+      font-weight : 600;
   }
   h2 {
       font-weight: 400;
@@ -69,6 +70,7 @@ const FooterContainer = styled.div`
   .social__links {
     display: flex;
     align-items: center;
+    font-weight : 500;
 
     & > *:not(:last-child) {
       margin-right: 40px;
@@ -119,6 +121,8 @@ const FooterContainer = styled.div`
       align-items: center;
       justify-content: space-between;
       flex-wrap: wrap;
+     a{  font-weight : 400;font-size : 2rem; }
+     h6{ font-weight : 400; color : var(--text2); }
     }
   }
 `
