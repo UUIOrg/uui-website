@@ -12,12 +12,12 @@ const connectDB = async () => {
       useUnifiedTopology: true,
       useNewUrlParser: true,
       useCreateIndex: true,
-      'useFindAndModify': false
+      useFindAndModify: false,
     })
     console.log(`MongoDB Connected: ${connection.connection.host}`)
   } catch (error) {
     console.log(`Error: ${error.message}`)
-    // process.exit(1) -> it going to exit with failure
+    // process.exit(1) -> it is going to exit with failure
     process.exit(1)
   }
 }
