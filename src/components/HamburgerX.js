@@ -3,7 +3,7 @@ import styled from "styled-components"
 import { Link } from "gatsby"
 import { gsap } from 'gsap';
 
-const Hamburger = ({state}) => {
+const Hamburger = ({ state }) => {
 
   let heroRef = useRef(null);
   let navRef = useRef(null);
@@ -22,8 +22,51 @@ const Hamburger = ({state}) => {
       }
     })
 
-    if(state){
+    if(state.clicked === false){
       gsap.timeline()
+      .to([navChildren[0].firstChild,navChildren[1].firstChild,navChildren[2].firstChild,navChildren[3].firstChild],{
+        delay : 0.5,
+        skewX: 10,
+        y: navChildren[0].offsetHeight,
+        opacity : 0, 
+        stagger:{
+          amount : 0.4,
+        }
+      })
+      .to([heroRef.children[0],heroRef.children[1]],{
+        delay : 0.5,
+        height : 0,
+        ease: 'power4.inOut',
+        duration: 0.8,
+        stagger : {
+          amount : 0.4
+        }
+      })
+      .to(heroRef,{
+        duration : 1,
+        css : {
+          display : 'none',
+        }
+      })
+    }  
+    
+
+    console.log(navChildren[0].offsetHeight);
+
+    if(state.clicked === true || 
+      state.clicked === true && state.initial === null){
+
+      gsap.timeline()
+      .to(heroRef,{
+        css : {
+          display : "block"
+        }
+      })
+      .to(heroRef,{
+        duration : 0,
+        opacity:1,
+        height : "100%"
+      })
       .from([heroRef.children[0],heroRef.children[1]],{
         delay : 0.5,
         height : "0%",
@@ -36,7 +79,7 @@ const Hamburger = ({state}) => {
       .from([navChildren[0].firstChild,navChildren[1].firstChild,navChildren[2].firstChild,navChildren[3].firstChild],{
         delay : 0.5,
         skewY: 10,
-        y: navChildren[0].offsetHeight,
+        y: 100,
         opacity : 0,
         stagger:{
           amount : 0.4,
@@ -50,13 +93,7 @@ const Hamburger = ({state}) => {
         }
       },"=-.3")
     }
-  
-    /**/
-    
-
-   
-
-  },[])
+  },[state])
 
   return (
     <HamburgerMenu ref={ele => heroRef = ele }>
@@ -107,8 +144,6 @@ const Hamburger = ({state}) => {
 }
 
 const HamburgerMenu = styled.div`
-  /* display: none; */
-  z-index: 9;
   top: 0;
   bottom: 0;
   left: 0;
@@ -118,11 +153,9 @@ const HamburgerMenu = styled.div`
   width: 100%;
   visibility: hidden;
   backface-visibility: hidden;
+  display: none;
 
   .menu-sec-backcol {
-    background-color: #f3ec78;
-    background-image: linear-gradient(120deg, var(--lightBlue), var(--deepBlue));
-    background-size: 100%;
     z-index: -1;
     top: 0;
     bottom: 0;
@@ -131,11 +164,14 @@ const HamburgerMenu = styled.div`
     position: fixed;
     height: 100%;
     width: 100%;
+    background: var(--textbase);
   }
 
   .menu-layer {
+    background-color: #f3ec78;
+    background-image: linear-gradient(120deg, var(--lightBlue), var(--deepBlue));
+    background-size: 100%;
     position: relative;
-    background: var(--textbase);
     height: 100%;
     overflow: hidden;
     .menu-city-background {

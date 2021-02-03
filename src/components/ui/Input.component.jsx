@@ -45,8 +45,10 @@ const InputElement = styled.div`
 	font-weight: 500;
 	-webkit-appearance: none; 
     resize:none;
+	font-size : 2.5rem;
 	::-webkit-input-placeholder{
 		color : var(--text2);
+		font-size : 2.5rem;
 	}
 }
 

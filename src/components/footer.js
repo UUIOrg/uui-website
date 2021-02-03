@@ -64,6 +64,16 @@ const FooterContainer = styled.div`
   }
   h2 {
       font-weight: 400;
+      display:flex;
+      flex-direction: column;
+      width: max-content;
+      &::after{
+        content : '';
+        background-color : #fff;
+        width:100%;
+        height: 1.7px;
+        margin-top: 1.5rem;
+      }
   }
   background-color: var(--textbase);
 
@@ -78,7 +88,16 @@ const FooterContainer = styled.div`
   }
 
   .email {
-    padding-bottom: 10px;
+    display:flex;
+      flex-direction: column;
+      width: max-content;
+      &::after{
+        content : '';
+        background-color : #ffffff30;
+        width:100%;
+        height: 1px;
+        margin-top: 0.5rem;
+      }
   }
 
   .link {
@@ -89,11 +108,6 @@ const FooterContainer = styled.div`
   .default {
     color: #fff;
     font-weight: 300;
-  }
-
-  .border {
-    border-bottom: 1px solid #fff;
-    display: inline-block;
   }
 
   .location {
@@ -111,17 +125,13 @@ const FooterContainer = styled.div`
       padding-bottom: 20px;
     }
 
-    /* &__contact {
-            margin-top: 100px;
-        } */
-
     &__bottom {
       margin-top: 100px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       flex-wrap: wrap;
-     a{  font-weight : 400;font-size : 2rem; }
+     a{  font-weight : 500;font-size : 2rem; }
      h6{ font-weight : 400; color : var(--text2); }
     }
   }

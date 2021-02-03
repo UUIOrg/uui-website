@@ -1,5 +1,6 @@
 import express from "express"
 import emailValidator from 'deep-email-validator'
+
 const router = express.Router();
 
 async function isEmailValid(email) {

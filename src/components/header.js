@@ -5,11 +5,35 @@ import styled from "styled-components"
 import Hamburger from "./ui/Hamburger.component"
 import HamburgerX from "./HamburgerX"
 import { Logo } from './utils/icons'
-import gsap from "gsap"
+import Menu from "./ui/Menu.component"
 
 const Header = ({ siteTitle }) => {
 
-  const [open,setOpen] = useState(false);
+  const [open,setOpen] = useState({
+    initial : false,
+    clicked : null
+  });
+
+  const handleHamburger = _ => {
+    if(open.initial === false){
+      setOpen({
+        initial : null,
+        clicked : true
+      });
+    }
+    else if(open.clicked){
+      setOpen({
+        initial : null,
+        clicked : !open.clicked
+      })
+    }
+    else if(open.clicked === false){
+      setOpen({
+        initial : null,
+        clicked : !open.clicked
+      })
+    }
+  }
 
   return  (
     <header>
@@ -22,22 +46,21 @@ const Header = ({ siteTitle }) => {
               </Link>
               <div>Urban <span>UI</span></div>
             </div>
-            <Link className="header-link" to="#about">
+            {/*<Link className="header-link" to="/">
               About
             </Link>
-            <Link className="header-link" to="#career">
+            <Link className="header-link" to="/">
               Career
             </Link>
-            <Link className="header-link" to="#blog">
+            <Link className="header-link" to="/">
               Blog
             </Link>
-            <Link className="header-link btn-contact" to="#contact">
+            <Link className="header-link btn-contact" to="/">
               Contact
             </Link>
-            <Hamburger
-            burger={open} 
-            onClick={() => setOpen(!open)}/> 
-            {open && <HamburgerX state={open}/> }
+          */}
+            <Menu />
+            <HamburgerX state={open}/>
           </div>
         </div>
       </HeaderContainer>

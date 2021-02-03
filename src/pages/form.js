@@ -57,6 +57,8 @@ const Form = () => {
         }
     });
 
+    const [countDown,setCountDown] = useState(false);
+
     const [ options,setOPtions ] = React.useState(requirments)
 
     const [ budgets,setBudget ] = React.useState(budgetValue);
@@ -67,8 +69,6 @@ const Form = () => {
 
 
     let formData = [];
-    let formOptions = [];
-    let BudgetArray = [];
 
     for(let i in form){
         formData.push({data : form[i],i})
@@ -86,32 +86,30 @@ const Form = () => {
     const SubmitHandler = eve => {
         eve.preventDefault();
         localStorage.setItem("client_send", true);
-    }
-
-    const Optionhandler = (opt,id,arr,reqs,setState) => {
-        const updatedFormOpt = [...reqs];
-        const updatedFormEle = { ...updatedFormOpt[id] };
-        updatedFormEle.state = !reqs[id].state;
-        arr.push(opt);
-        updatedFormOpt[id] = updatedFormEle;;
-        setState(updatedFormOpt);
-        console.log(arr)
+        setCountDown(true);
     }
 
     useEffect(() => {
-       
-    },[]);
+        if(countDown){
+            setTimeout(() => {
+                localStorage.clear();
+            },7000)
+        }
+    },[countDown]);
+
 
     useEffect(() => {
-        (async() => {
-            const data = await axios.post(
-                "/email",
-                {
-                    email : "sssamaa789@gmail.com"
-                }
-              )
-            console.log(data);
-        })()
+      (async () => {
+        try {
+            const { data } = await axios.post("http://localhost:5000/response", {
+              email: "inneressence.ds@gmail.com",
+            })
+      
+            console.log(data)
+        } catch(error) {
+            console.log(error);
+        }
+      })();
     },[])
  
 
@@ -197,14 +195,12 @@ const Form = () => {
                     <h3>Choose your requirments...</h3>
                     <OptionSection>
                         {
-                            options.map(({option},id) => {
+                            options.map(({option}) => {
                                 return <Button
-                                key={option}
                                 border="1px solid rgba(0, 0, 0, 0.1)"
                                 color="var(--textbase)"
                                 margin={"0 1rem 1rem 0"}
-                                onClick={() => Optionhandler(option,id,formOptions,options,setOPtions)}
-                                >
+                                key={option}>
                                     {option}
                                 </Button>
                             })
@@ -224,7 +220,7 @@ const Form = () => {
                         <h3>Project budget (INR)</h3>
                         <OptionSection>
                             {
-                                budgets.map(({requirment},id) => {
+                                budgets.map(({requirment}) => {
                                     return <Button
                                     border="1px solid rgba(0, 0, 0, 0.1)"
                                     color="var(--textbase)"
@@ -276,7 +272,8 @@ h2{
     font-weight : 500;
     background-color: #f3ec78;
     background-image: linear-gradient(120deg, var(--lightBlue), var(--deepBlue));
-    background-size: 100%;
+    //background-image: url('../images/snipet.jpg');
+    background-size: cover;
     -webkit-background-clip: text;
     -moz-background-clip: text;
     -webkit-text-fill-color: transparent; 
@@ -287,7 +284,6 @@ h2{
     padding:0;
     height: max-content;
     span{
-
     }
 }
 h3{
@@ -307,7 +303,7 @@ margin-left : 5rem;
 max-width: 780px;
 h3{
     color : var(--text2);
-    
+    font-size : 2.5rem;
 }
 `
 const Header = styled.div`
@@ -372,7 +368,6 @@ span{
         color : #fff;
         padding: 1rem;
         border-radius: 50%;
-
     }
 }
 `

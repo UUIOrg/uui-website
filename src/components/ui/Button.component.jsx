@@ -9,10 +9,10 @@ const Btn = styled.button`
 --webkit-appearance : none;
 background-color : ${props => props.backgroundColor || "transparent"};
 border: none;
-border-radius : 2.5rem;
+border-radius : 2.2rem;
 font-family: 'Volte';
 font-weight : 500;
-padding: ${props => props.p || "2rem 4rem"};
+padding: ${props => props.p || "1.7rem 3rem"};
 cursor : pointer;
 margin : ${props => props.margin || '0'};
 border: ${props => props.border || '2px solid transparent'};

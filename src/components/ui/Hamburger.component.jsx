@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const Hamburger = ({state,onClick}) => {
     return (
-        <Menu BgCol={!state ? "#000" : "#FFF"}
+        <Menu BgCol={state.clicked === false || state.clicked === null ? "#000" : "#FFF"}
         onClick={onClick}>
             <div className="line-menu half start"></div>
             <div className="line-menu"></div>
@@ -13,10 +13,13 @@ const Hamburger = ({state,onClick}) => {
 }
 
 export default Hamburger
- 
-const Menu = styled.div`
-  width: 35px;
-  height: 23px;
+
+const Menu = styled.button`
+  border:none;
+  outline: none;
+  background-color: transparent;
+  width: 50px;
+  height: 25px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -32,6 +35,7 @@ const Menu = styled.div`
   border-radius: 50px;
   width: 100%;
   height: 4px;
+  mix-blend-mode : difference;
 }
 
 .line-menu.half {

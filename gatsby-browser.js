@@ -10,7 +10,7 @@ const { default: Cursor } = require('./src/components/ui/Cursor.component');
 const GlobalStyles = createGlobalStyle`
 :root{
   --font : 'Volte';
-  --textbase : #000;
+  --textbase : #0f0e0d;
   --text : rgba(156, 163, 175, 1);
   --text2 : rgb(175, 175, 175);
   --deepBlue :  #0093E9;
